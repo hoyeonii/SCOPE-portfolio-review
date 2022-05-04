@@ -1,0 +1,87 @@
+.profile {
+  display: flex;
+}
+.profile-left {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid wheat;
+}
+
+.profile-left > div {
+  border: 1px solid brown;
+  width: 250px;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.profile-info-img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 2px solid black;
+  margin: 20px 0px 10px;
+}
+.profile-info-createBy {
+  font-size: 20px;
+  font-weight: 500;
+}
+.profile-info-field {
+  padding: 1px 20px;
+  font-size: 11px;
+  font-weight: 500;
+  background-color: bisque;
+  border-radius: 5px;
+  border: 1.5px solid black;
+}
+.profile-info-title {
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.profile-info button {
+  width: 100%;
+  padding: 7px 0px;
+  margin-top: 5px;
+  border-radius: 7px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.profile-info .followProfile {
+  width: 100%;
+}
+
+.profile-follow {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+}
+
+.profile-follow > div {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 10px;
+}
+
+.profile-follow > div > div:nth-child(2) {
+  font-size: 12px;
+}
+
+.profile-portfolio > button {
+  width: 100%;
+  padding: 40px 0px;
+  margin-top: 10px;
+
+  border-radius: 7px;
+  font-size: 14px;
+  font-weight: 500;
+}

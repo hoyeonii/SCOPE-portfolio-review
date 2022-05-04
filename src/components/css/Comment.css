@@ -1,0 +1,30 @@
+.comments-container {
+  padding: 15px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.comments {
+  height: 80vh;
+  overflow-y: scroll;
+}
+.comments-count {
+  padding-bottom: 20px;
+  font-size: 20px;
+  font-weight: 700;
+}
+.comment-info {
+  display: flex;
+}
+.comment-name {
+  font-weight: 600;
+  align-self: flex-end;
+}
+.comment-text {
+  font-weight: 600;
+  font-size: 14px;
+  padding: 5px 0px;
+  line-height: 1.2;
+}

@@ -1,0 +1,44 @@
+.profileList-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 40px 20px;
+  margin: 13px;
+  background-color: cornsilk;
+  border-radius: 7px;
+}
+
+.profileList-info-img {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 2px solid black;
+  margin: 20px 0px 10px;
+}
+.profileList-info-createBy {
+  font-size: 20px;
+  font-weight: 500;
+}
+.profileList-info-field {
+  padding: 1px 20px;
+  font-size: 11px;
+  font-weight: 500;
+  background-color: bisque;
+  border-radius: 5px;
+  border: 1.5px solid black;
+}
+.profileList-info-title {
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.profileList-info button {
+  width: 100%;
+  padding: 7px 0px;
+  margin-top: 5px;
+  border-radius: 7px;
+  font-size: 14px;
+  font-weight: 500;
+}

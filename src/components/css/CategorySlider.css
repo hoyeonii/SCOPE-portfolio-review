@@ -1,0 +1,63 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  width: 100%;
+  height: 80px;
+  background: rgb(248, 240, 255);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel {
+  width: 100%;
+  height: 80px;
+  /* background: rgba(201, 165, 118, 0.37); */
+  direction: rtl;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+}
+
+.carousel.active {
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}
+
+.cWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.item {
+  background: rgb(255, 217, 0);
+  display: flex;
+  justify-content: center;
+  width: 200px;
+  border: none;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.item p {
+  position: relative;
+  /* top: -5px; */
+  font-size: 15px;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  user-select: none;
+  margin: 0;
+}
+
+.item:first-child {
+  margin-right: 0px !important;
+}
+.item:last-child {
+  margin-left: 0px !important;
+}

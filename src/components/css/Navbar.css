@@ -1,0 +1,67 @@
+.navbar {
+  border: 1px solid #bc8f8f;
+  padding: 0px !important;
+}
+.navbar-left {
+  width: 25%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar-left  a {
+	box-sizing: border-box;
+  text-decoration: none;
+  padding: 10px 0px;
+ border-top: 4px solid transparent;
+ 
+ border-bottom: 4px solid transparent;
+
+
+}
+.navbar-left > a:hover{
+ border-bottom: 4px solid cadetblue;
+
+}
+/* .navbar-left > a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 5%;
+  height: 4px;
+  background: blue;
+} */
+.navbar-left > a:nth-child(1) {
+  font-weight: 700;
+  font-size: 30px;
+  margin-right: 30px;
+  padding: 0px 0px;
+  border-bottom: none;
+}
+
+.navbar-middle {
+  width: 40%;
+  border-radius: 50px;
+}
+.navbar-middle * {
+  margin: 3px 0px 3px 10px;
+}
+.searchBar {
+  border: none;
+}
+
+.navbar-right {
+  width: 25%;
+}
+.navbar-right > div {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-right button {
+  font-size: 13px;
+  width: 90px;
+  height: 35px;
+  border-radius: 3px;
+}

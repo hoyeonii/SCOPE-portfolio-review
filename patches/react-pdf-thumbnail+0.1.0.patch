@@ -1,0 +1,44 @@
+diff --git a/node_modules/react-pdf-thumbnail/lib/pdfthumbnail.js b/node_modules/react-pdf-thumbnail/lib/pdfthumbnail.js
+index 503c502..4f582fc 100644
+--- a/node_modules/react-pdf-thumbnail/lib/pdfthumbnail.js
++++ b/node_modules/react-pdf-thumbnail/lib/pdfthumbnail.js
+@@ -10,21 +10,27 @@ module.exports = function pdfthumbnail(data, config) {
+ 			isVideo
+ 		);
+ 		fileName = `${fileName}.${extension}`;
+-		var allowedExtensions = data.substr(data.lastIndexOf('.') + 1);
+-		if (/(pdf|zip|doc)$/gi.test(allowedExtensions)) {
+-			try {
++				try {
+ 				resolve(readPdf(data, config));
+ 			} catch (err) {
+ 				reject({ error: true, errorDetails: err });
+ 			}
+-		} else {
+-			reject({
+-				error: true,
+-				errorDetails: {
+-					wrongFile: true,
+-					message: 'File type is not pdf',
+-				},
+-			});
+-		}
++
++
++		// if (/(pdf|zip|doc)$/gi.test(allowedExtensions)) {
++		// 	try {
++		// 		resolve(readPdf(data, config));
++		// 	} catch (err) {
++		// 		reject({ error: true, errorDetails: err });
++		// 	}
++		// } else {
++		// 	reject({
++		// 		error: true,
++		// 		errorDetails: {
++		// 			wrongFile: true,
++		// 			message: 'File type is not pdf',
++		// 		},
++		// 	});
++		// }
+ 	});
+ };

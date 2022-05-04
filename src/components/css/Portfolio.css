@@ -1,0 +1,101 @@
+.portfolio-upper {
+  display: flex;
+}
+.portfolio-portfolio {
+  width: 75%;
+  border: 1px solid cadetblue;
+}
+.portfolio-profile {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 1px solid rebeccapurple;
+  padding: 10px 15px;
+  border-radius: 10px;
+}
+.portfolio-profile-left {
+  display: flex;
+  align-items: center;
+}
+
+.portfolio-profile-right > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px;
+}
+.portfolio-profile-right > div > div {
+  align-items: center;
+}
+.portfolio-profile-right .followProfile > span {
+  visibility: hidden;
+}
+.portfolio-profile-right .likeProfile > span {
+  visibility: hidden;
+}
+
+/* pdf */
+.portfolio-viewPortfolio {
+  position: relative;
+}
+.portfolio-viewPortfolio-button {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  width: 100%;
+  height: 8%;
+  top: 50%;
+  transform: translate(0%, -50%);
+  padding: 0px 5%;
+  /* -ms-transform: translate(-50%, -50%); */
+}
+.portfolio-viewPortfolio-button button {
+  border: none;
+  width: 5%;
+
+  background-color: gainsboro;
+}
+
+.portfolio-viewPortfolio-pagenum {
+  position: absolute;
+  left: 50%;
+  bottom: 5%;
+  font-weight: 500;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
+.react-pdf__Document {
+  width: 100%;
+  text-align: center;
+}
+
+.react-pdf__Page {
+  display: flex;
+  justify-content: center;
+}
+.react-pdf__Page__canvas {
+  /* //element.style이라는 기존 세팅을 override 하려면 !important 해주면 됨!! */
+  width: 100% !important;
+  height: 100% !important ;
+  padding: 10px 15px;
+  border-radius: 20px;
+}
+
+.react-pdf__Page__textContent {
+  display: none;
+}
+
+.react-pdf__Page__annotations {
+  display: none;
+}
+
+.portfolio-viewPortfolio-description {
+  padding: 10px 20px;
+}
+
+/* comment */
+.portfolio-comment {
+  width: 25%;
+  border: 1px solid rosybrown;
+}

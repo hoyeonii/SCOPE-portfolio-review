@@ -1,0 +1,22 @@
+.home-portfolio-button {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 30px;
+}
+
+.home-portfolio-sortButton * {
+  border: 2px solid transparent;
+  background: none;
+}
+/* 
+.sortButton *:hover {
+  border-bottom: 2px solid cadetblue;
+} */
+
+.home-portfolio-viewAll {
+  font-size: 12px;
+  padding: 5px 15px;
+  border-radius: 3px;
+  border: none;
+  background-color: gainsboro;
+}
