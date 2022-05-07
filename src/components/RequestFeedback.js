@@ -24,8 +24,6 @@ function RequestFeedback() {
   const [message, setMessage] = useState("");
   const [requestPortfolio, setRequestPortfolio] = useState("");
 
-  console.log(user);
-
   const topics = [
     "Layout",
     "Visual",
@@ -73,6 +71,10 @@ function RequestFeedback() {
   };
 
   const sendRequest = () => {
+    if (!requestPortfolio) {
+      alert("Select portfolio");
+      return;
+    }
     const requestRef = collection(db, "FeedbackRequest");
     addDoc(requestRef, {
       from: user.uid,
@@ -88,6 +90,24 @@ function RequestFeedback() {
 
   return (
     <div>
+      <h4>Select Portfolio</h4>
+
+      {portfolios.map((port) => {
+        return (
+          <div
+            style={{
+              border: "1px solid red",
+              backgroundColor: port.id === requestPortfolio ? "yellow" : "",
+            }}
+            onClick={() => {
+              setRequestPortfolio(port.id);
+            }}
+          >
+            {port.id}
+            <img src={port.imageUrl} alt="thumbnail" width="100px" />
+          </div>
+        );
+      })}
       <h4>Feedback Request</h4>
       <span>
         It helps Experts to provide the best feedback when you give them as many
@@ -130,24 +150,6 @@ function RequestFeedback() {
         <br />
         to: {id}
         <br />
-        requestPortfolio:{requestPortfolio}
-        <br />
-        {portfolios.map((port) => {
-          return (
-            <div
-              style={{
-                border: "1px solid red",
-                backgroundColor: port.id === requestPortfolio ? "yellow" : "",
-              }}
-              onClick={() => {
-                setRequestPortfolio(port.id);
-              }}
-            >
-              {port.id}
-              <img src={port.imageUrl} alt="thumbnail" width="100px" />
-            </div>
-          );
-        })}
       </div>
       <button onClick={sendRequest}>Send Feedback Request</button>
     </div>

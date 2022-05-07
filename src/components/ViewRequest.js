@@ -7,23 +7,35 @@ import {
   orderBy,
   query,
   where,
+  updateDoc,
 } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 
 function ViewRequest() {
   const { requestId } = useParams();
   const [request, setRequest] = useState([]);
+  const [portfolio, setPortfolio] = useState([]);
   useEffect(() => {
     const docRef = doc(db, "FeedbackRequest", requestId);
-
+    updateDoc(docRef, {
+      status: 2,
+    });
     onSnapshot(docRef, (snapshot) => {
       setRequest({ ...snapshot.data(), id: snapshot.id });
     });
   }, []);
 
+  useEffect(() => {
+    if (request.length != 0) {
+      const portfolioRef = doc(db, "Portfolio", request.portfolio);
+      onSnapshot(portfolioRef, (snapshot) => {
+        setPortfolio({ ...snapshot.data(), id: snapshot.id });
+      });
+    }
+  }, [request]);
+
   return (
     <div>
-      ViewRequest
       <h4>Feedback Request from {request.fromName}</h4>
       <p>{request.message}</p>
       <h4>Feedback Topics</h4>
@@ -37,18 +49,20 @@ function ViewRequest() {
         })}
       <br />
       <Link to={`/portfolio/${request.portfolio}`}>
+        {request.portfolio}
+        <img src={portfolio.imageUrl} alt="image" width="200px" />
         <button>View Portfolio</button>
       </Link>
       <Link to={`/addFeedback/${requestId}`}>
         <button>Start Feedback</button>
       </Link>
-      <button
+      {/* <button
         onClick={() => {
-          console.log(request);
+          console.log(portfolio);
         }}
       >
         click me
-      </button>
+      </button> */}
     </div>
   );
 }

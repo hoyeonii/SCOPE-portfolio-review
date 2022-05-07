@@ -16,6 +16,7 @@ import RequestFeedback from "./components/RequestFeedback.js";
 import "./App.css";
 import ViewRequest from "./components/ViewRequest.js";
 import AddFeedback from "./components/AddFeedback.js";
+import ViewFeedback from "./components/ViewFeedback.js";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/accountInfo" element={<AccountInfo />} />
           <Route path="/requestFeedback/:id" element={<RequestFeedback />} />
           <Route path="/request/:requestId" element={<ViewRequest />} />
+          <Route path="/feedback/:requestId" element={<ViewFeedback />} />
           <Route path="/addFeedback/:requestId" element={<AddFeedback />} />
           <Route path="/*" element={<>Page Not Found</>} />
         </Routes>

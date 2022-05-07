@@ -14,13 +14,15 @@ import { Link } from "react-router-dom";
 import DeleteArticle from "./DeleteArticle";
 import LikeProfile from "./LikeProfile";
 import CommentCount from "./CommentCount";
+import FeedbackRequestStatus from "./FeedbackRequestStatus";
 import "../css/ListPortfolios.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Document, Page } from "react-pdf/dist/esm/entry.webpack";
 
-function ListPortfolios({ byField, userId, numPortfolio, viewMode }) {
+function ListPortfolios({ byField, userId, numPortfolio, viewMode, requests }) {
   const [user] = useAuthState(auth);
   const [portfolios, setPortfolios] = useState([]);
+  console.log(requests);
 
   useEffect(() => {
     const portfolioRef = collection(db, "Portfolio");
@@ -81,7 +83,6 @@ function ListPortfolios({ byField, userId, numPortfolio, viewMode }) {
           id: doc.id,
           ...doc.data(),
         }));
-        console.log(portfolio);
         setPortfolios(portfolio);
       });
     } else {
@@ -99,6 +100,7 @@ function ListPortfolios({ byField, userId, numPortfolio, viewMode }) {
       });
     }
   }, [byField, viewMode]);
+
   return (
     <div className="portfolios-list">
       {/* {viewMode} */}
@@ -140,6 +142,32 @@ function ListPortfolios({ byField, userId, numPortfolio, viewMode }) {
                 </div>
               </div>
             </div>
+            {requests && (
+              <div className="portfolios-feedback">
+                <button
+                  onClick={() => {
+                    console.log(
+                      requests.filter((req) => req.portfolio == port.id)
+                    );
+                  }}
+                >
+                  clickme
+                </button>
+
+                <FeedbackRequestStatus
+                  status={3}
+                  requests={requests.filter((req) => req.portfolio == port.id)}
+                />
+                <FeedbackRequestStatus
+                  status={2}
+                  requests={requests.filter((req) => req.portfolio == port.id)}
+                />
+                <FeedbackRequestStatus
+                  status={1}
+                  requests={requests.filter((req) => req.portfolio == port.id)}
+                />
+              </div>
+            )}
           </div>
         ))
       )}

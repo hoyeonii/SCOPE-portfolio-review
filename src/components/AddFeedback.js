@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import {
   doc,
@@ -20,9 +20,13 @@ function AddFeedback() {
   const [selectedTopic, setSelectedTopic] = useState([]);
   const [previewOn, setPreviewOn] = useState(false);
   const [passData, setPassData] = useState({});
-  let topic = [];
+  let topic = ["Summary", "things1", "things2", "things3", "needs1", "needs2"];
 
-  let feedbackData = { portfolio: request.portfolio, data: [] };
+  let feedbackData = {
+    requestId: requestId,
+    portfolio: request.portfolio,
+    data: [],
+  };
   const urls = [];
 
   useEffect(() => {
@@ -36,8 +40,8 @@ function AddFeedback() {
     request.selectedTopic &&
       (topic =
         selectedTopic.length > 0
-          ? ["Summary", ...request.selectedTopic, ...selectedTopic]
-          : ["Summary", ...request.selectedTopic]);
+          ? [...topic, ...request.selectedTopic, ...selectedTopic]
+          : [...topic, ...request.selectedTopic]);
   }, [request, selectedTopic]);
   const topics = [
     "Layout",
@@ -81,15 +85,24 @@ function AddFeedback() {
   const handleFeedbackSubmit = (e) => {
     e.preventDefault();
     let inputData = e.target;
-    const inputCount = 1 + request.selectedTopic.length + selectedTopic.length;
+    const inputCount = request.selectedTopic.length + selectedTopic.length;
+    console.log(inputCount);
+    console.log(e);
+    console.log(e.target[0].type);
 
-    for (let i = 0; i < inputCount * 2; i++) {
+    for (let i = 0; i < 6 + inputCount * 2; i++) {
+      console.log(e.target[i].type, i);
       if (e.target[i].type === "file") {
+        ////여기 .type를 못읽어오겠대 e.target이 이상한듯
+        console.log(e.target[i].files);
         images.push(e.target[i].files[0]);
       }
     }
     const uploadImg = async () => {
+      console.log("uploadImg");
       images.map((img, i) => {
+        console.log(img);
+
         if (img) {
           const storageRef = ref(
             storage,
@@ -128,16 +141,34 @@ function AddFeedback() {
     uploadImg();
 
     const formData = () => {
-      feedbackData = { portfolio: request.portfolio, data: [] };
+      feedbackData = {
+        requestId: requestId,
+        portfolio: request.portfolio,
+        data: [],
+      };
+      //앞에 6개 text만 있는 부분
+      for (let i = 0; i < 6; i++) {
+        console.log(urls);
+        console.log(topic);
+        console.log(urls.find((url) => url.id === i));
+
+        feedbackData.data.push({
+          topic: topic[i],
+          text: inputData[i].value,
+          image: null,
+        });
+      }
+      //그 뒤 사진과 함께 상세설명 부분
       for (let i = 0; i < inputCount; i++) {
         console.log(urls);
+        console.log(topic);
         console.log(urls.find((url) => url.id === i));
         let url = urls.find((url) => url.id === i)
           ? urls.find((url) => url.id === i).url
           : null;
         feedbackData.data.push({
-          topic: topic[i],
-          text: inputData[2 * i].value,
+          topic: topic[6 + i],
+          text: inputData[6 + i * 2].value,
           image: url,
         });
       }
@@ -166,6 +197,44 @@ function AddFeedback() {
         toast("Error adding Feedback", { type: "error" });
       });
   };
+
+  function AddImage({ topic }) {
+    console.log(topic);
+    const [imgLoaded, setImgLoaded] = useState(false);
+    const [fileValue, setFileValue] = useState("");
+    const ref = useRef();
+    const handleClick = (e) => {
+      e.preventDefault();
+      // e.stopPropagation();
+      setImgLoaded(false);
+      ref.current.value = "";
+
+      var preview = document.getElementById(topic);
+      preview.src = "";
+    };
+    return (
+      <div>
+        <img id={topic} width="200px" />
+        <input
+          type="file"
+          name={`${topic}Pic`}
+          ref={ref}
+          onChange={(e) => {
+            e.preventDefault();
+            // console.log(e.target.files[0]);
+            // setImg(e.target.files[0]);
+            setImgLoaded(true);
+            if (e.target.files.length > 0) {
+              var src = URL.createObjectURL(e.target.files[0]);
+              var preview = document.getElementById(topic);
+              preview.src = src;
+            }
+          }}
+        />
+        {imgLoaded && <button onClick={handleClick}>Delete Image</button>}
+      </div>
+    );
+  }
   return (
     <div>
       {previewOn ? (
@@ -176,7 +245,7 @@ function AddFeedback() {
           <h4>Feedback Template </h4>
           <span>
             {request.fromName} has highlighted these topics as their "must have"
-            categories of feedback.{" "}
+            categories of feedback.
           </span>
           <br />
           {request.selectedTopic &&
@@ -222,7 +291,6 @@ function AddFeedback() {
               onSubmit={(e) => {
                 e.preventDefault();
                 handleFeedbackSubmit(e);
-                setPreviewOn(true);
               }}
             >
               <div>
@@ -232,7 +300,21 @@ function AddFeedback() {
                   into the details later. (Suggested Length:4-5 sentences)
                 </span>
                 <input type="text" name="summary" />
-                <input type="file" name="summaryPic" />
+                {/* <input type="file" name="summaryPic" /> */}
+                {/* <AddImage topic="Summary" /> */}
+                <h5>Key Takeaways</h5>
+                <span>
+                  Tell {request.fromName} the three things you liked most about
+                  their portfolio and the two biggest things they can focus on
+                  improving now. (Suggested Length: 1 sentence per bullet point)
+                </span>
+                <h5>Things You Like</h5>
+                <input type="text" />
+                <input type="text" />
+                <input type="text" />
+                <h5>Needs Some Work</h5>
+                <input type="text" />
+                <input type="text" />
               </div>
               {request.selectedTopic &&
                 request.selectedTopic.map((topic) => {
@@ -241,8 +323,9 @@ function AddFeedback() {
                       <h5>{topic}</h5>
                       <span>{topicsDescription[topics.indexOf(topic)]}</span>
                       <br />
-                      <input type="text" name={topic} />
-                      <input type="file" name={`${topic}Pic`} />
+                      <input type="text" />
+                      {/* <input type="file" name={`${topic}Pic`} /> */}
+                      <AddImage topic={topic} />
                     </div>
                   );
                 })}
@@ -253,17 +336,28 @@ function AddFeedback() {
                     <span>{topicsDescription[topics.indexOf(topic)]}</span>
                     <br />
                     <input type="text" />
-                    <input type="file" name={`${topic}Pic`} />
+                    {/* <input type="file" name={`${topic}Pic`} /> */}
+                    <AddImage topic={topic} />
                   </div>
                 );
               })}
-              <button type="submit">Preview FeedBack</button>
+              <button
+                type="submit"
+                // onClick={(e) => {
+                //   e.preventDefault();
+                //   // handleFeedbackSubmit(e);
+                //   // setPreviewOn(true);
+                // }}
+              >
+                Preview FeedBack
+              </button>
             </form>
           </section>
           <button
             onClick={() => {
               console.log(urls);
               console.log(previewOn);
+              console.log(topic);
               // console.log(urlofImages);
             }}
           >
@@ -272,6 +366,7 @@ function AddFeedback() {
           <button
             onClick={() => {
               storeData(feedbackData);
+
               // console.log(urlofImages);
             }}
           >

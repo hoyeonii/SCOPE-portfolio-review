@@ -7,6 +7,7 @@ import {
   orderBy,
   query,
   where,
+  getDoc,
 } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebaseConfig";
@@ -27,53 +28,22 @@ function Profile() {
   const [portfolios, setPortfolios] = useState([]);
   const [followers, setFollowers] = useState([]);
   const [following, setFollowing] = useState([]);
-  const [requestList, setRequestList] = useState([]);
+  const [requestsTome, setRequestsTome] = useState([]);
+  const [requestsFromme, setRequestsFromme] = useState([]);
   let navigate = useNavigate();
+
+  useEffect(() => {
+    setFollowers(profile.followers);
+  }, [profile]);
 
   useEffect(() => {
     const docRef = doc(db, "Profile", id);
 
     onSnapshot(docRef, (snapshot) => {
       setProfile({ ...snapshot.data(), id: snapshot.id });
-      //   setprofilePic(profile.imageUrl);
-      //   setUserId(profile.userId);
-      setFollowers(profile.followers);
+      setFollowers({ ...snapshot.data(), id: snapshot.id }.followers);
     });
 
-    //Review Request 가져오기
-    const requestRef = collection(db, "FeedbackRequest");
-    const q = query(
-      requestRef,
-      where("to", "==", id) //
-    );
-
-    onSnapshot(q, (snapshot) => {
-      const requests = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setRequestList(requests);
-    });
-
-    // ///포트폴리오 가져오기
-    // const portfolioRef = collection(db, "Portfolio");
-    // // setByField(filteredField); ////////여기 지워봐ㅏ
-    // const q = query(
-    //   portfolioRef,
-    //   where("userId", "==", userId) //
-    //   // orderBy("createDate", "desc")
-    // );
-
-    // onSnapshot(q, (snapshot) => {
-    //   const profile = snapshot.docs.map((doc) => ({
-    //     id: doc.id,
-    //     ...doc.data(),
-    //   }));
-    //   setPortfolios(profile);
-    // });
-  }, [profile]);
-
-  useEffect(() => {
     const profileRef = collection(db, "Profile");
     const q = query(
       profileRef,
@@ -87,6 +57,35 @@ function Profile() {
         ...doc.data(),
       }));
       setFollowing(followingList);
+    });
+
+    // Request 가져오기
+    const requestRef = collection(db, "FeedbackRequest");
+
+    //Review Request 가져오기
+    const qTo = query(
+      requestRef,
+      where("to", "==", id) //
+    );
+
+    onSnapshot(qTo, (snapshot) => {
+      const requests = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setRequestsTome(requests);
+    });
+    //내가 보낸 Request 가져오기
+    const qFrom = query(
+      requestRef,
+      where("from", "==", id) //
+    );
+    onSnapshot(qFrom, (snapshot) => {
+      const requests = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setRequestsFromme(requests);
     });
   }, []);
 
@@ -122,29 +121,11 @@ function Profile() {
               Edit Profile
             </button>
           ) : (
-            // (
-            //   <button
-            //     onClick={() => {
-            //       console.log(followers);
-            //     }}
-            //   >
-            //     cliske me{" "}
-            //   </button>
-            // )
             followers && <FollowProfile id={id} followers={followers} />
           )}
         </div>
 
         <div className="profile-follow">
-          {/* <button
-            onClick={() => {
-              console.log(followers);
-              console.log(following);
-            }}
-          >
-            followers
-          </button> */}
-
           <div>
             <div>{following.length}</div>
             <div>following</div>
@@ -169,11 +150,11 @@ function Profile() {
         {/* <div>followers: {followers.followers.length}</div> */}
       </section>
       <section className="profile-right">
-        <ListPortfolios byField={"All"} userId={id} />
+        <ListPortfolios byField={"All"} userId={id} requests={requestsFromme} />
 
         <div>
           Feedback Request List
-          {requestList.map((request) => {
+          {requestsTome.map((request) => {
             return (
               <Link to={`/request/${request.id}`}>
                 <div>{request.id}</div>
@@ -182,6 +163,14 @@ function Profile() {
           })}
         </div>
       </section>
+      {/* <button
+        onClick={() => {
+          console.log(profile);
+          console.log(requestsFromme);
+        }}
+      >
+        click me
+      </button> */}
     </div>
   );
 }
