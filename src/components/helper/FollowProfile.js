@@ -41,14 +41,19 @@ function FollowProfile({ id, followers }) {
   };
 
   return (
-    <div className="followProfile">
-      {/* <span>{followersCount}</span> */}
-      {user && ( //이렇게 데이터를 먼저 받아와서 진행해야하는 경우 &&를 사용해서 데이터가 로딩 됐는지 먼저 확인하기!!
-        <button onClick={handleFollow}>
-          {following ? "Unfollow" : "Follow"}
-        </button>
-      )}
-    </div>
+    user && (
+      <button onClick={handleFollow}>
+        {following ? "Unfollow" : "Follow"}
+      </button>
+    )
+    // <div className="followProfile">
+    // <span>{followersCount}</span>
+    // {user && (
+    //   <button onClick={handleFollow}>
+    //     {following ? "Unfollow" : "Follow"}
+    //   </button>
+    // )}
+    // </div>
 
     /*
         //하트모양

@@ -47,24 +47,6 @@ function ListPortfolios({ byField, userId, numPortfolio, viewMode, requests }) {
           orderBy("createDate", "desc"),
           limit(numPortfolio)
         );
-        // if (viewMode == "trending") {
-        //   console.log(2);
-
-        //   q = query(
-        //     portfolioRef,
-        //     orderBy("likes.length", "desc"),
-        //     limit(numPortfolio)
-        //   );
-        // } else {
-        //   console.log(3);
-
-        //   q = query(
-        //     portfolioRef,
-
-        //     orderBy("createDate", "desc"),
-        //     limit(numPortfolio)
-        //   );
-        // }
       } else {
         //필드 지정했을때
         console.log(4);
@@ -118,6 +100,7 @@ function ListPortfolios({ byField, userId, numPortfolio, viewMode, requests }) {
                     alt="title"
                     className="portfolios-image"
                   />
+                  <LikeProfile id={port.id} likes={port.likes} />
                 </div>
               </Link>
 

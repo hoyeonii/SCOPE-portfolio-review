@@ -25,21 +25,22 @@ function Navbar() {
   const [profileImg, setProfileImg] = useState(null);
   const [signUpModalOn, setSignUpModalOn] = useState(false);
   let navigate = useNavigate();
-
+  // console.log(user);
   useEffect(() => {
     if (user) {
       const docRef = doc(db, "Profile", user.uid);
 
       onSnapshot(docRef, (snapshot) => {
         setProfile({ ...snapshot.data(), id: snapshot.id });
+        setProfileImg({ ...snapshot.data(), id: snapshot.id }.imageUrl);
       });
     }
-  }, []);
+  }, [user]);
 
-  useEffect(() => {
-    setProfileImg(profile.imageUrl);
-    console.log(profile);
-  }, [profile]);
+  // useEffect(() => {
+  //   setProfileImg(profile.imageUrl);
+  //   console.log(profile);
+  // }, [profile]);
 
   return (
     <div className="navbar">
@@ -107,7 +108,7 @@ function Navbar() {
             <Link to={`/profile/${user.uid}`}>
               <img
                 src={profileImg}
-                alt="profileImg"
+                alt="img"
                 style={{
                   width: "35px",
                   borderRadius: "50%",
@@ -115,15 +116,6 @@ function Navbar() {
                 }}
               />
             </Link>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                console.log("woo", profile.imageUrl);
-                console.log(profile);
-              }}
-            >
-              image
-            </button>
             {/* <Link to="/accountInfo">upload profile</Link> */}
 
             <Link to="/">

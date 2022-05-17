@@ -83,8 +83,13 @@ function Experts() {
 
   return (
     <div>
-      Experts showing here
-      {/* <CategorySlider /> */}
+      <div className="header">
+        <h3>Experts</h3>
+        <span>
+          our community of Experts will give you top industry advice on how to
+          make your portfolio stand out!
+        </span>
+      </div>
       <div className="carousel">
         <Carousel _data={items} {...setting}>
           {items.map((i, _i) => (

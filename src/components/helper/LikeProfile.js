@@ -8,7 +8,10 @@ function LikeProfile({ id, likes }) {
   const [likesCount, setLikesCount] = useState(likes.length);
 
   const likesRef = doc(db, "Portfolio", id);
-  const handleLike = () => {
+  const handleLike = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+
     if (likes?.includes(user.uid)) {
       updateDoc(likesRef, {
         likes: arrayRemove(user.uid),

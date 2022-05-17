@@ -1,37 +1,59 @@
 .profileList-info {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   text-align: center;
-  padding: 40px 20px;
-  margin: 13px;
+  /* padding: 40px 20px; */
+  margin: 3%;
   background-color: cornsilk;
   border-radius: 7px;
 }
-
+.profileList-info a {
+  text-decoration: none;
+  color: black;
+}
+.profileList-info a:hover {
+  color: black;
+}
+.profileList-info-imgContainer {
+  position: relative;
+}
 .profileList-info-img {
   width: 110px;
   height: 110px;
   border-radius: 50%;
   border: 2px solid black;
-  margin: 20px 0px 10px;
+  margin: 15% 0px;
+}
+.profileList-info-detail {
+  /* width: 100%; */
+
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding: 7% 10%;
+  background-color: salmon;
 }
 .profileList-info-createBy {
   font-size: 20px;
   font-weight: 500;
+  padding-bottom: 5px;
 }
 .profileList-info-field {
-  padding: 1px 20px;
-  font-size: 11px;
+  position: absolute;
+  top: 10%;
+  left: 5%;
+  padding: 1px 15px;
+  /* font-size: 11px; */
   font-weight: 500;
   background-color: bisque;
   border-radius: 5px;
   border: 1.5px solid black;
 }
 .profileList-info-title {
-  font-size: 13px;
+  /* font-size: 13px;
   font-weight: 500;
-  margin-bottom: 20px;
+  margin-bottom: 20px; */
 }
 
 .profileList-info button {

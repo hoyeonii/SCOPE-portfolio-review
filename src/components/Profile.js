@@ -30,6 +30,7 @@ function Profile() {
   const [following, setFollowing] = useState([]);
   const [requestsTome, setRequestsTome] = useState([]);
   const [requestsFromme, setRequestsFromme] = useState([]);
+  const [selectedTab, setSelectedTab] = useState("About Me");
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -89,29 +90,59 @@ function Profile() {
     });
   }, []);
 
+  const tabs = ["About Me", "Portfolio", "Saved"];
+  const profileTab = (el) => {
+    return (
+      <a
+        href="#"
+        onClick={() => {
+          setSelectedTab(el);
+        }}
+        style={{
+          borderBottom:
+            selectedTab === el ? "5px solid orange" : "5px solid transparent",
+        }}
+      >
+        {el}
+      </a>
+    );
+  };
+
   return (
     <div className="profile">
-      <section className="profile-left">
+      <section className="profile-header">
         <div className="profile-info">
           <img
             src={profile.imageUrl}
             alt="profilePic"
             className="profile-info-img"
           />
-          <span className="profile-info-createBy"> {profile.createBy}</span>
-          <span className="profile-info-field">{profile.field}</span>
-          <span className="profile-info-title">{profile.title}</span>
+          <div className="profile-info-detail">
+            <span className="profile-info-createBy">{profile.displayName}</span>
+            <div>
+              <span className="profile-info-field">{profile.field}</span>
+            </div>
+            <span className="profile-info-title">
+              {profile.title} {profile.career}
+            </span>
+            <div className="profile-follow">
+              <div>
+                <span>Followers {followers && followers.length}</span>
+              </div>
+              <span>|</span>
+              <div>
+                <span>Following {following.length}</span>
+              </div>
 
-          <button>CV</button>
-          <Link to={`/requestFeedback/${id}`}>
-            <button
-            // onClick={() => {
-            //   navigate("/requestFeedback", { requestToId: 5 });
-            // }}
-            >
-              request feedback
-            </button>
-          </Link>
+              {/* //팔로우 버튼 */}
+              {/* {followers && ( //이렇게 데이터를 먼저 받아와서 진행해야하는 경우 &&를 사용해서 데이터가 로딩 됐는지 먼저 확인하기!!
+                <FollowProfile id={id} followers={followers} />
+              )} */}
+            </div>
+          </div>
+        </div>
+
+        <div className="profile-portfolio">
           {user && id == user.uid ? (
             <button
               onClick={() => {
@@ -123,36 +154,31 @@ function Profile() {
           ) : (
             followers && <FollowProfile id={id} followers={followers} />
           )}
-        </div>
-
-        <div className="profile-follow">
-          <div>
-            <div>{following.length}</div>
-            <div>following</div>
-          </div>
-          <span>|</span>
-          <div>
-            <div>{followers && followers.length}</div>
-            <div>follower</div>
-          </div>
-
-          {/* //팔로우 버튼 */}
-          {/* {followers && ( //이렇게 데이터를 먼저 받아와서 진행해야하는 경우 &&를 사용해서 데이터가 로딩 됐는지 먼저 확인하기!!
-              <FollowProfile id={id} followers={followers} />
-            )} */}
-        </div>
-        <div className="profile-portfolio">
-          <button>Portfolio</button>
-
           <button>FeedBack</button>
         </div>
 
         {/* <div>followers: {followers.followers.length}</div> */}
       </section>
-      <section className="profile-right">
-        <ListPortfolios byField={"All"} userId={id} requests={requestsFromme} />
+      <section className="profile-bottom">
+        <div className="profile-tab-container">
+          <div className="profile-tab">{tabs.map((el) => profileTab(el))}</div>
+        </div>
+        {selectedTab === "About Me" && <div>wow</div>}
+        {selectedTab === "Portfolio" && (
+          <ListPortfolios
+            byField={"All"}
+            userId={id}
+            requests={requestsFromme}
+          />
+        )}
+        {selectedTab === "Saved" && <div>Saved</div>}
 
         <div>
+          {profile.expert && (
+            <Link to={`/requestFeedback/${id}`}>
+              <button>request feedback</button>
+            </Link>
+          )}
           Feedback Request List
           {requestsTome.map((request) => {
             return (

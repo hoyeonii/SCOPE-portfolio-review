@@ -42,7 +42,7 @@ function Comment({ id, userId }) {
         class="fa-solid fa-comment-dots"
         style={{ padding: "0px 2px 0px 10px" }}
       ></i>
-      {numofComment}
+      <span>{numofComment}</span>
     </div>
   );
 }

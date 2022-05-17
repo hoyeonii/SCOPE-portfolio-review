@@ -18,7 +18,7 @@ import {
   where,
 } from "firebase/firestore";
 
-function ListExperts({ byField }) {
+function ListExperts({ byField, numExperts }) {
   const [profiles, setProfiles] = useState([]);
   useEffect(() => {
     const profileRef = collection(db, "Profile");
@@ -41,7 +41,9 @@ function ListExperts({ byField }) {
         id: doc.id,
         ...doc.data(),
       }));
-      setProfiles(profile);
+      numExperts
+        ? setProfiles(profile.slice(0, numExperts))
+        : setProfiles(profile);
       // console.log("sorted by field" + byField);
     });
   }, [byField]);
@@ -55,21 +57,28 @@ function ListExperts({ byField }) {
           profiles.map((pro) => (
             <div key={pro.id} className="profileList-info">
               <Link to={`/profile/${pro.id}`}>
-                <img
-                  className="profile-info-img"
-                  src={pro.imageUrl}
-                  alt="profilePic"
-                  height={200}
-                />
-              </Link>
-              <span className="profileList-info-createBy">
-                {pro.createBy}
-                {pro.expert == true ? (
-                  <img src={verifiedMark} alt="verifiedMark" width={15} />
-                ) : (
-                  ""
-                )}
-                {/* <button
+                <div className="profileList-info-imgContainer">
+                  <img
+                    className="profileList-info-img"
+                    src={pro.imageUrl}
+                    alt="profilePic"
+                    height={200}
+                  />{" "}
+                  <span className="profileList-info-field">{pro.field}</span>
+                </div>
+                <div className="profileList-info-detail">
+                  <span className="profileList-info-createBy">
+                    {pro.createBy}
+                    {pro.expert == true ? (
+                      <img
+                        src={verifiedMark}
+                        alt="verifiedMark"
+                        style={{ margin: "0 0 5px 5px", width: "15px" }}
+                      />
+                    ) : (
+                      ""
+                    )}
+                    {/* <button
                   onClick={(e) => {
                     e.preventDefault();
                     console.log("exper?", pro.expert);
@@ -77,10 +86,13 @@ function ListExperts({ byField }) {
                 >
                   clickme
                 </button> */}
-              </span>
-              <span className="profileList-info-field">{pro.field}</span>
-              <span className="profileList-info-title">{pro.title}</span>
-              <button>See detail</button>
+                  </span>
+
+                  <span className="profileList-info-title">{pro.title}</span>
+                  <span className="profileList-info-career">{pro.career}</span>
+                  {/* <button>See detail</button> */}
+                </div>
+              </Link>
             </div>
           ))
         )}

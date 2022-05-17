@@ -56,6 +56,9 @@ export default function Login() {
             margin: "10px 0",
           }}
         />
+        <button className="login-signin" onClick={handleLogin}>
+          Log In
+        </button>
         <div className="login-button">
           <div
             className="login-forgotPwd"
@@ -75,12 +78,8 @@ export default function Login() {
             }}
             style={{ cursor: "pointer" }}
           >
-            {" "}
             You don't have account yet?
           </div>
-          <button className="login-signin" onClick={handleLogin}>
-            Sign IN
-          </button>
         </div>
       </div>
     </div>

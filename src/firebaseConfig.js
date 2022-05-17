@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
@@ -27,4 +27,15 @@ const app = initializeApp(firebaseConfig);
 export const storage = getStorage(app);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+export const signInWithGoogle = () => {
+  return signInWithPopup(auth, provider);
+  // .then((res) => {
+  //   console.log(res);
+  //   const name = res.user.displayName;
+  //   const email = res.user.email;
+  //   const profilePic = res.user.photoURL;
+  // })
+  // .catch((err) => console.log(err));
+};
 // const analytics = getAnalytics(app);

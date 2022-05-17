@@ -1,38 +1,45 @@
 .profile {
-  display: flex;
+  /* display: grid;
+  grid-template-columns: 1fr 3fr; */
 }
-.profile-left {
-  display: flex;
-  flex-direction: column;
+.profile-header {
+  display: grid;
+  grid-template-columns: 4fr 2fr;
   border: 1px solid wheat;
+  padding: 3%;
 }
 
 .profile-left > div {
-  border: 1px solid brown;
-  width: 250px;
+  border: 1px solid aqua;
+  /* width: 250px; */
 }
 
 .profile-info {
   display: flex;
+  /* align-items: center; */
+  /* text-align: center; */
+}
+.profile-info-detail {
+  display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 40px 20px;
 }
 
 .profile-info-img {
-  width: 90px;
-  height: 90px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   border: 2px solid black;
-  margin: 20px 0px 10px;
+
+  margin: 0 2%;
 }
 .profile-info-createBy {
   font-size: 20px;
   font-weight: 500;
+  margin-bottom: 5px;
 }
 .profile-info-field {
   padding: 1px 20px;
+  margin: 10px 0;
   font-size: 11px;
   font-weight: 500;
   background-color: bisque;
@@ -42,7 +49,8 @@
 .profile-info-title {
   font-size: 13px;
   font-weight: 500;
-  margin-bottom: 20px;
+  padding-top: 5px;
+  /* margin-bottom: 20px; */
 }
 
 .profile-info button {
@@ -62,26 +70,56 @@
   align-content: center;
   justify-content: center;
   align-items: center;
-  height: 80px;
 }
-
+.profile-follow > span {
+  padding: 0 10px;
+}
 .profile-follow > div {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  text-align: center;
-  padding: 10px;
+  text-align: center; */
+  /* padding: 10px; */
 }
 
 .profile-follow > div > div:nth-child(2) {
   font-size: 12px;
 }
-
-.profile-portfolio > button {
-  width: 100%;
-  padding: 40px 0px;
-  margin-top: 10px;
-
+.profile-portfolio {
+  display: flex;
+  margin-top: auto;
+}
+.profile-portfolio button {
+  width: 48%;
+  padding: 10px 0px;
+  margin: 2px;
   border-radius: 7px;
   font-size: 14px;
   font-weight: 500;
+}
+
+.profile-bottom {
+  width: 88vw;
+  margin: auto;
+}
+.profile-tab-container {
+  width: 96%;
+  border-bottom: 1px solid red;
+  margin: auto;
+}
+.profile-tab {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid aqua;
+  /* padding: 0 2%; */
+  width: 30%;
+}
+.profile-tab > a {
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 2%;
+  text-decoration: none;
+  color: black;
+}
+.profile-tab > a:hover {
+  border-bottom: 5px solid orange;
 }

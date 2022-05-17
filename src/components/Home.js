@@ -56,6 +56,19 @@ function Home() {
   return (
     <div>
       Home
+      <div className="home-expertsList">
+        <h4>Experts</h4>
+        <span>
+          Our community of Experts will give you top industry advice on how to
+          make your portfolio stand out
+        </span>
+        <ListExperts byField={byField} numExperts={4} />
+      </div>
+      <h4>Portfolios</h4>
+      <span>
+        Explore our library of portfolio and help others by giving them
+        feedback!
+      </span>
       <div className="carousel">
         <Carousel _data={items} {...setting}>
           {items.map((i, _i) => (
@@ -115,7 +128,6 @@ function Home() {
       <ListPortfolios byField={byField} numPortfolio={12} viewMode={viewMode} />
       {/* {listPortfolios} */}
       {/* <Experts /> */}
-      <ListExperts byField={byField} />
     </div>
   );
 }

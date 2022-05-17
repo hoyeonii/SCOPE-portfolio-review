@@ -38,8 +38,22 @@
     grid-template-columns: repeat(6, 1fr);
   }
 }
-
+.portfolios-image-container {
+  position: relative;
+  text-align: center;
+}
+.portfolios-image-container > .likeProfile {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.3rem;
+}
+.portfolios-image-container > .likeProfile span {
+  display: none;
+}
 .portfolios-info {
+  border: 1px solid aqua;
+
   display: flex;
   justify-content: space-between;
   padding: 10px 3px;
@@ -50,10 +64,10 @@
   align-items: center;
 }
 .portfolios-pic {
-  width: 42px;
-
-  height: 42px;
-  border-radius: 30px;
+  width: 30px;
+  height: auto;
+  border-radius: 50%;
+  margin-right: 10px;
 }
 .portfolios-profile {
   display: flex;
@@ -67,13 +81,12 @@
 .portfolios-list > div > div {
   border: 1px solid wheat;
 }
-.portfolios-image-container {
-  /* width: 250px;
-  height: 160px; */
-  text-align: center;
-}
+
 .portfolios-image {
   width: 250px;
   height: 160px;
   border-radius: 8px;
+}
+.portfolios-info-right span {
+  font-size: 13px;
 }
