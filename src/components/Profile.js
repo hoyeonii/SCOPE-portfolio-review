@@ -17,6 +17,7 @@ import FollowProfile from "./helper/FollowProfile";
 import "./css/Profile.css";
 import ListPortfolios from "./helper/ListPortfolios";
 import RequestFeedback from "./RequestFeedback";
+import SignInModal from "./SignInModal";
 
 function Profile() {
   const { id } = useParams();
@@ -31,6 +32,8 @@ function Profile() {
   const [requestsTome, setRequestsTome] = useState([]);
   const [requestsFromme, setRequestsFromme] = useState([]);
   const [selectedTab, setSelectedTab] = useState("About Me");
+  const [signUpModalOn, setSignUpModalOn] = useState(false);
+
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -98,9 +101,9 @@ function Profile() {
         onClick={() => {
           setSelectedTab(el);
         }}
+        className="profile-tabs"
         style={{
-          borderBottom:
-            selectedTab === el ? "5px solid orange" : "5px solid transparent",
+          borderBottom: selectedTab === el && "5px solid orange",
         }}
       >
         {el}
@@ -154,7 +157,7 @@ function Profile() {
           ) : (
             followers && <FollowProfile id={id} followers={followers} />
           )}
-          <button>FeedBack</button>
+          {/* <button>FeedBack</button> */}
         </div>
 
         {/* <div>followers: {followers.followers.length}</div> */}
@@ -171,9 +174,14 @@ function Profile() {
             requests={requestsFromme}
           />
         )}
-        {selectedTab === "Saved" && <div>Saved</div>}
+        {selectedTab === "Saved" && <ListPortfolios likedBy={id} />}
+        <SignInModal
+          show={signUpModalOn}
+          onHide={() => setSignUpModalOn(false)}
+        />
 
-        <div>
+        {/* //피드백 요청하기 */}
+        {/* <div>
           {profile.expert && (
             <Link to={`/requestFeedback/${id}`}>
               <button>request feedback</button>
@@ -187,7 +195,7 @@ function Profile() {
               </Link>
             );
           })}
-        </div>
+        </div> */}
       </section>
       {/* <button
         onClick={() => {

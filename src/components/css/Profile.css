@@ -30,7 +30,7 @@
   border-radius: 50%;
   border: 2px solid black;
 
-  margin: 0 2%;
+  margin: 0 5%;
 }
 .profile-info-createBy {
   font-size: 20px;
@@ -89,9 +89,9 @@
   margin-top: auto;
 }
 .profile-portfolio button {
-  width: 48%;
+  width: 100%;
   padding: 10px 0px;
-  margin: 2px;
+  margin: 2px 5%;
   border-radius: 7px;
   font-size: 14px;
   font-weight: 500;
@@ -109,7 +109,6 @@
 .profile-tab {
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid aqua;
   /* padding: 0 2%; */
   width: 30%;
 }
@@ -119,7 +118,9 @@
   padding: 2%;
   text-decoration: none;
   color: black;
+  border-bottom: 5px solid transparent;
 }
-.profile-tab > a:hover {
-  border-bottom: 5px solid orange;
+.profile-tab a:hover {
+  border-bottom: 3px solid rgb(255, 217, 146);
+  color: black;
 }

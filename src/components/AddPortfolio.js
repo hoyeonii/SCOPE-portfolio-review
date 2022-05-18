@@ -33,6 +33,7 @@ function AddPortfolio() {
   const [progress, setProgress] = useState(0);
   const [pageNumber, setPageNumber] = useState(1);
   const [thumbnail, setThumbnail] = useState("");
+  const [loading, setLoading] = useState(false);
   //   const [fileprogress, setFileprogress] = useState(0);
 
   ///firebase Profile 테이블에서 해당 유저 데이터 가져오기
@@ -50,26 +51,41 @@ function AddPortfolio() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const handleImageChange = async (e) => {
-    setFormData({ ...formData, image: e.target.files[0] }).then(() =>
-      onButtonClick()
-    );
+    setFormData({ ...formData, image: e.target.files[0], url: null });
+    // .then(() =>
+    //   onButtonClick()
+    // );
   };
-
+  const handleUrlChange = async (e) => {
+    setFormData({ ...formData, url: e.target.value, image: null });
+  };
+  const handleUrlImageChange = async (e) => {
+    setFormData({ ...formData, urlImage: e.target.files[0] });
+  };
   const handleUpload = (e) => {
-    if (!formData.title || !formData.description || !formData.image) {
+    if (
+      !formData.title ||
+      !formData.description ||
+      (!formData.image && !formData.urlImage)
+    ) {
       alert("Please fill all the fields");
       return;
-    } else if (!thumbnail) {
+    } else if (!thumbnail && !formData.urlImage) {
       alert("Please select thumbnail");
       return;
     }
 
     const storageRef = ref(
       storage,
-      `/image/${Date.now()}${formData.image.name}` //뭐가 안되면 files를 image로 바꿔야할수도?
+      formData.image
+        ? `/image/${Date.now()}${formData.image.name}`
+        : `/image/${Date.now()}${formData.url}` //뭐가 안되면 files를 image로 바꿔야할수도?
     );
 
-    const uploadTask = uploadBytesResumable(storageRef, formData.image);
+    const uploadTask = uploadBytesResumable(
+      storageRef,
+      formData.image ? formData.image : formData.urlImage
+    );
 
     uploadTask.on(
       "state_changed",
@@ -94,6 +110,7 @@ function AddPortfolio() {
           addDoc(articleRef, {
             title: formData.title,
             description: formData.description,
+            url: formData.url,
             imageUrl: url,
             createDate: Timestamp.now().toDate(),
             profileImg: userProfile[0].imageUrl,
@@ -148,19 +165,19 @@ function AddPortfolio() {
   const reff = useRef(null);
 
   const onButtonClick = useCallback(() => {
-    console.log("onButtonClick");
+    // console.log("onButtonClick");
     if (reff.current === null) {
       return;
     }
 
     toPng(reff.current, { cacheBust: true })
       .then((dataUrl) => {
+        setLoading(true);
         const link = document.createElement("a");
-        link.download = "my-image-name.png";
         link.href = dataUrl;
         setThumbnail(dataUrl);
         // console.log(dataUrl);
-        link.click();
+        // link.click();
         // dataUrl.splice(0, 1);
         // console.log(dataUrl);
 
@@ -184,6 +201,7 @@ function AddPortfolio() {
         //   }
         // );
       })
+      .then(() => setLoading(false))
       .catch((err) => {
         console.log(err);
       });
@@ -197,71 +215,150 @@ function AddPortfolio() {
         </>
       ) : (
         <>
-          {" "}
-          <h2>Upload Portfolio</h2>
-          <label htmlFor="">Title</label>
-          <input
-            type="text"
-            name="title"
-            value={formData.title}
-            onChange={(e) => handleChange(e)}
-          ></input>
-          <label htmlFor="">Description</label>
-          <textarea
-            name="description"
-            value={formData.description}
-            onChange={(e) => handleChange(e)}
-          ></textarea>
-          <label htmlFor="">Image</label>
-          <input
-            type="file"
-            name="image"
-            // accept="image/*"
-            onChange={(e) => {
-              handleImageChange(e);
-            }}
-          ></input>
-          {progress === 0 ? null : (
-            <div className="progress">
-              <div>{`uploading image ${progress}%`}</div>
+          {loading && (
+            <div className="addport-loading-background">
+              <div className="addport-loading">Loading..</div>
             </div>
           )}
-          <button onClick={(e) => handleUpload(e)}>Upload</button>
-          <div
-            className="addPort-thumbnail"
-            ref={reff}
-            style={{ width: "300px" }}
-          >
-            <Document
-              file={formData.image}
-              onLoadSuccess={console.log(`yayyy`)}
-            >
-              <Page height={150} pageNumber={pageNumber} />
-            </Document>
+          <div className="addport-input-file-container">
+            <h2>Portfolio Upload</h2>
+            <div className="addport-input-file-cover">
+              <i class="fa-solid fa-file-lines"></i>
+              <span className="addport-input-file-uploadPDF">Upload PDF</span>
+              <span className="addport-input-file-maximum">Maximum 5MB</span>
+              <span className="addport-input-file-uploadPDF">
+                {formData.image && formData.image.name}
+              </span>
+            </div>
+            <input
+              type="file"
+              name="image"
+              // accept="image/*"
+              className="addport-input-file"
+              onChange={(e) => {
+                handleImageChange(e);
+              }}
+            ></input>
           </div>
-          <button
-            onClick={() => {
-              pageNumber > 1 && setPageNumber(pageNumber - 1);
-            }}
-          >
-            previous
-          </button>
-          <button
-            onClick={() => {
-              pageNumber < 5 && setPageNumber(pageNumber + 1);
-            }}
-          >
-            next
-          </button>
-          <button onClick={onButtonClick}>Click me</button>
-          <img src={thumbnail} alt="thumb"></img>
-          {thumbnail}
+
+          <div className="addport-input-text-container">
+            <span className="addport-input-text-or">or</span>
+            <div className="addport-input-text-link">
+              <label>URL</label>
+              <input
+                type="url"
+                name="url"
+                onChange={(e) => handleUrlChange(e)}
+              />
+            </div>
+
+            <label htmlFor="">Title</label>
+            <input
+              type="text"
+              name="title"
+              value={formData.title}
+              onChange={(e) => handleChange(e)}
+            ></input>
+            <label htmlFor="">Introduction</label>
+            <textarea
+              name="description"
+              value={formData.description}
+              onChange={(e) => handleChange(e)}
+            ></textarea>
+            {/* <label htmlFor="">Image</label> */}
+            {progress === 0 ? null : (
+              <div className="progress">
+                <div>{`uploading image ${progress}%`}</div>
+              </div>
+            )}
+            <label>Thumbnail</label>
+            {formData.image && (
+              <div className="addport-pdf-thumbnail">
+                <div className="addport-pdf-thumbnail-preview">
+                  <button
+                    onClick={() => {
+                      pageNumber > 1 && setPageNumber(pageNumber - 1);
+                    }}
+                  >
+                    {"<"}
+                  </button>
+                  <div
+                    className="addPort-thumbnail"
+                    ref={reff}
+                    // style={{ width: "300px", height: "200px" }}
+                  >
+                    {/* {formData.url && <iframe src={formData.url} />} */}
+
+                    <Document
+                      file={formData.image}
+                      onLoadSuccess={console.log(`yayyy`)}
+                    >
+                      <Page height={150} pageNumber={pageNumber} />
+                    </Document>
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      pageNumber < 5 && setPageNumber(pageNumber + 1);
+                    }}
+                  >
+                    {">"}
+                  </button>
+                  {/* <img src={thumbnail} alt="thumb"></img> */}
+                </div>
+                <button
+                  className="addport-pdf-thumbnail-saveBtn"
+                  onClick={onButtonClick}
+                >
+                  Save as Thumbnail
+                </button>
+                {thumbnail && <div>Saved!</div>}
+              </div>
+            )}
+            {formData.url && (
+              <div className="addport-input-text-link-thumbnail">
+                <div className="addport-input-text-link-thumbnail-preview">
+                  <span>No image yet</span>
+                  <img
+                    id="thumbnail"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTj1UU-9fy5fPAMrlsO9QmqcuAV5i65SBRDD4dTHS8kG9zD6U6piqsZFm7wyTC399RljYI&usqp=CAU"
+                  />
+                </div>
+
+                <input
+                  type="file"
+                  name="urlImage"
+                  accept="image/*"
+                  onChange={(e) => {
+                    e.preventDefault();
+                    handleUrlImageChange(e);
+                    if (e.target.files.length > 0) {
+                      let src = URL.createObjectURL(e.target.files[0]);
+                      let preview = document.getElementById("thumbnail");
+                      preview.src = src;
+                    }
+                  }}
+                />
+              </div>
+            )}
+          </div>
+
+          {/* {formData.urlImage && (
+            <img src={formData.urlImage.name} alt="thumbnail" />
+          )} */}
           {/* <ViewThumbnail /> */}
           {/* <form onSubmit={formHandler}>
             <input type="file" />
             <button type="submit">Upload</button>
           </form>
           <h3>Upload {fileprogress}</h3> */}
+          <button onClick={() => console.log(formData)}>show form</button>
+          <button
+            className="addPort-uploadBtn"
+            onClick={(e) => handleUpload(e)}
+          >
+            Upload Portfolio
+          </button>
         </>
       )}
     </div>

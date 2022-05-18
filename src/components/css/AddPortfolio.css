@@ -1,6 +1,149 @@
+.addport-loading-background {
+  position: absolute;
+  border: 2px solid blue;
+  background-color: gray;
+  opacity: 0.9;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.addport-loading {
+  position: absolute;
+  padding: 5%;
+  width: 80%;
+  /* height: 10%; */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid red;
+  background-color: white;
+  border-radius: 0.3rem;
+  text-align: center;
+  z-index: 1;
+}
+
+.addport-input-file-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  padding: 3% 5% 0;
+}
+.addport-input-file-container h2 {
+  text-align: center;
+}
+.addport-input-file-cover {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-size: 2rem;
+  padding: 3%;
+  background-color: rgb(241, 241, 241);
+  border: 2px solid gainsboro;
+  border-radius: 7px;
+}
+.addport-input-file-uploadPDF {
+  font-size: 1rem;
+  font-weight: 600;
+}
+.addport-input-file-maximum {
+  font-size: 0.7rem;
+}
+.addport-input-file {
+  position: absolute;
+  top: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.addport-input-text-container {
+  display: flex;
+  flex-direction: column;
+  padding: 3% 5%;
+  padding-top: 0;
+  font-size: 0.9rem;
+  /* text-align: center; */
+}
+
+.addport-input-text-or {
+  align-self: center;
+}
+.addport-input-text-link {
+  display: flex;
+  /* padding: 3%; */
+}
+.addport-input-text-link label {
+  background-color: aqua;
+  padding: 3px 10px;
+}
+.addport-input-text-link input {
+  width: 100%;
+}
+.addport-input-text-container > label {
+  padding: 10px 0 3px;
+}
+.addport-input-text-link-thumbnail {
+  display: flex;
+  align-items: center;
+}
+/* .addport-input-text-link-thumbnail-preview {
+  position: relative;
+} */
+.addport-input-text-link-thumbnail img {
+  width: 200px;
+  height: 140px;
+  margin-top: 3px;
+  margin-right: 2%;
+  border: 1px solid gainsboro;
+}
+.addport-input-text-link-thumbnail input {
+  margin-top: auto;
+}
+.addport-pdf-thumbnail {
+  text-align: center;
+}
+.addport-pdf-thumbnail-preview {
+  display: flex;
+  /* margin: auto; */
+  /* text-align: center; */
+  align-items: center;
+  padding: 0 25%;
+}
+.addport-pdf-thumbnail-preview button {
+  /* width: 20%; */
+
+  height: 100%;
+}
+.addport-pdf-thumbnail-saveBtn {
+  width: 20%;
+}
+
+.addPort-thumbnail {
+  width: 30vw;
+  /* height: 200px; */
+  /* margin: auto; */
+  overflow: hidden;
+  border: red solid 5px;
+}
+.addPort-thumbnail > iframe {
+  border: 0 solid;
+  width: 1200px;
+  height: 800px;
+  margin-left: -455px;
+  margin-top: -305px;
+  -webkit-transform: scale(0.25);
+  -moz-transform: scale(0.25);
+  -o-transform: scale(0.25);
+  -ms-transform: scale(0.25);
+}
 .addPort-thumbnail canvas {
-  /* border: 4px solid saddlebrown; */
   padding: 0;
   display: block;
   border-radius: 0;
+}
+.addPort-uploadBtn {
+  width: 100%;
+  padding: 2%;
+  border-radius: 0.3rem;
 }

@@ -16,32 +16,37 @@ import LikeProfile from "./LikeProfile";
 import CommentCount from "./CommentCount";
 import FeedbackRequestStatus from "./FeedbackRequestStatus";
 import "../css/ListPortfolios.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Document, Page } from "react-pdf/dist/esm/entry.webpack";
+import UploadPortfolioModal from "../UploadPortfolioModal";
 
-function ListPortfolios({ byField, userId, numPortfolio, viewMode, requests }) {
+function ListPortfolios({
+  byField,
+  userId,
+  numPortfolio,
+  viewMode,
+  requests,
+  likedBy,
+}) {
   const [user] = useAuthState(auth);
   const [portfolios, setPortfolios] = useState([]);
-  console.log(requests);
+  const [signUpModalOn, setSignUpModalOn] = useState(false);
 
   useEffect(() => {
     const portfolioRef = collection(db, "Portfolio");
     let q;
 
-    console.log(viewMode);
     if (userId) {
-      //프로필 있을때
-      console.log(1);
+      console.log(11111111);
 
+      //프로필 있을때
       q = query(
         portfolioRef,
         where("userId", "==", userId),
         orderBy("createDate", "desc")
       );
-    } else {
+    } else if (byField) {
+      console.log(2222222222);
       if (byField == "All") {
-        console.log(3);
-
+        console.log(3333333333);
         q = query(
           portfolioRef,
           orderBy("createDate", "desc"),
@@ -49,7 +54,7 @@ function ListPortfolios({ byField, userId, numPortfolio, viewMode, requests }) {
         );
       } else {
         //필드 지정했을때
-        console.log(4);
+        console.log(44444444);
         q = query(
           portfolioRef,
           where("field", "==", byField),
@@ -57,6 +62,14 @@ function ListPortfolios({ byField, userId, numPortfolio, viewMode, requests }) {
           limit(numPortfolio)
         );
       }
+    } else if (likedBy) {
+      // 프로필 Saved 칸
+      console.log(55555555);
+      q = query(
+        portfolioRef,
+        where("likes", "array-contains", likedBy),
+        orderBy("createDate", "desc")
+      );
     }
     let portfolio;
     if (viewMode !== "trending") {
@@ -81,12 +94,10 @@ function ListPortfolios({ byField, userId, numPortfolio, viewMode, requests }) {
         setPortfolios(portfolio);
       });
     }
-  }, [byField, viewMode]);
+  }, [byField, viewMode, numPortfolio]);
 
   return (
     <div className="portfolios-list">
-      {/* {viewMode} */}
-
       {portfolios.length === 0 ? (
         <span>no articles found</span>
       ) : (
@@ -125,7 +136,7 @@ function ListPortfolios({ byField, userId, numPortfolio, viewMode, requests }) {
                 </div>
               </div>
             </div>
-            {requests && (
+            {/* {requests && (
               <div className="portfolios-feedback">
                 <button
                   onClick={() => {
@@ -150,24 +161,29 @@ function ListPortfolios({ byField, userId, numPortfolio, viewMode, requests }) {
                   requests={requests.filter((req) => req.portfolio == port.id)}
                 />
               </div>
-            )}
+            )} */}
           </div>
         ))
       )}
       {userId && (
-        <Link to={`/accountInfo`}>
-          <div
-            className="portfolios-image-container"
-            style={{ margin: "10px" }}
-          >
-            <img
-              src="https://cdn.pixabay.com/photo/2017/11/10/05/24/add-2935429_960_720.png"
-              alt="title"
-              className="portfolios-image"
-            />
-          </div>
-        </Link>
+        <div
+          className="portfolios-image-container"
+          style={{ margin: "10px", cursor: "pointer" }}
+          onClick={() => {
+            setSignUpModalOn(true);
+          }}
+        >
+          <img
+            src="https://cdn.pixabay.com/photo/2017/11/10/05/24/add-2935429_960_720.png"
+            alt="title"
+            className="portfolios-image"
+          />
+        </div>
       )}
+      <UploadPortfolioModal
+        show={signUpModalOn}
+        onHide={() => setSignUpModalOn(false)}
+      />
     </div>
   );
 }

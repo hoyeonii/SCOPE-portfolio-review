@@ -14,6 +14,7 @@ import { db } from "../firebaseConfig";
 import verifiedMark from "./image/verifiedMark.jpg";
 
 import "./css/Comment.css";
+import { Placeholder } from "react-bootstrap";
 
 function Comment({ id, pageNumber, userId }) {
   const [comments, setComments] = useState([]);
@@ -78,43 +79,9 @@ function Comment({ id, pageNumber, userId }) {
   };
   return (
     <div className="comments-container">
-      <div className="comments-count"> Comment {comments.length}</div>
-      <div className="comments">
-        {comments
-          .filter((comment) => comment.pageNumber == pageNumber)
-          .map((comment) => (
-            <div className="comment">
-              <div className="comment-info">
-                <img
-                  src={comment.profileImg}
-                  alt="profilePic"
-                  height={25}
-                  width={25}
-                  style={{
-                    borderRadius: "50%",
-                    border: "2px solid gray",
-                    marginRight: "10px",
-                    marginTop: "5px",
-                  }}
-                ></img>
-                <div className="comment-name">{comment.name}</div>
-                {comment.varified && (
-                  <img
-                    src={verifiedMark}
-                    alt="verifiedMark"
-                    height={15}
-                    width={15}
-                    style={{ alignSelf: "flex-end", margin: "5px" }}
-                  ></img>
-                )}
-              </div>
-              <div className="comment-text">{comment.comment}</div>
-            </div>
-          ))}
-      </div>
       {userId ? (
-        <div>
-          Leave comment
+        <div className="comments-input">
+          <span className="comments-input-header">Leave comment</span>
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -122,22 +89,73 @@ function Comment({ id, pageNumber, userId }) {
               setText("");
             }}
           >
-            <label>
+            {profilePic && (
+              <img
+                className="comments-input-img"
+                src={profilePic}
+                alt="profilePic"
+              />
+            )}
+            <div className="comments-input-text-container">
               <input
                 type="text"
                 onChange={(e) => {
                   e.preventDefault();
                   setText(e.target.value);
                 }}
+                placeholder="Leave comment"
                 value={text}
+                className="comments-input-text"
               />
-            </label>
-            <input type="submit" value="Enter" />
+            </div>
+            <input
+              type="submit"
+              value="Send"
+              className="comments-input-sendBtn"
+            />
           </form>
         </div>
       ) : (
         <div>Log in to leave comment</div>
       )}
+      <div className="comments">
+        <span className="comments-count"> Comment {comments.length}</span>
+        {comments.length > 0 && (
+          <div className="comments-comments">
+            {comments
+              .filter((comment) => comment.pageNumber == pageNumber)
+              .map((comment) => (
+                <div className="comment">
+                  <div className="comment-info">
+                    <img
+                      src={comment.profileImg}
+                      alt="profilePic"
+                      height={25}
+                      width={25}
+                      style={{
+                        borderRadius: "50%",
+                        border: "2px solid gray",
+                        marginRight: "10px",
+                        marginTop: "5px",
+                      }}
+                    ></img>
+                    <div className="comment-name">{comment.name}</div>
+                    {comment.varified && (
+                      <img
+                        src={verifiedMark}
+                        alt="verifiedMark"
+                        height={15}
+                        width={15}
+                        style={{ alignSelf: "flex-end", margin: "5px" }}
+                      ></img>
+                    )}
+                  </div>
+                  <div className="comment-text">{comment.comment}</div>
+                </div>
+              ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

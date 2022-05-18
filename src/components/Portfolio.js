@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import {
   doc,
@@ -27,14 +27,27 @@ function Portfolio() {
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [file, setFile] = useState("");
+  const [url, setUrl] = useState("");
   const [profile, setProfile] = useState([]);
+  const [numSimilar, setNumSimilar] = useState(4);
 
+  const handleWindowResize = useCallback(() => {
+    setNumSimilar(Math.floor(window.innerWidth / 300));
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, [handleWindowResize]);
   useEffect(() => {
     const docRef = doc(db, "Portfolio", id);
 
     onSnapshot(docRef, (snapshot) => {
       setPortfolio({ ...snapshot.data(), id: snapshot.id });
-      setFile(portfolio.imageUrl);
+      portfolio.url ? setUrl(portfolio.url) : setFile(portfolio.imageUrl);
     });
   }, [file]);
 
@@ -74,7 +87,7 @@ function Portfolio() {
     <div>
       <div className="portfolio-upper">
         {portfolio && (
-          <section className="portfolio-portfolio">
+          <section className="portfolio">
             <div className="portfolio-profile">
               <div className="portfolio-profile-left">
                 <img
@@ -97,14 +110,6 @@ function Portfolio() {
                     imageUrl={portfolio.imageUrl}
                   />
                 ) : (
-                  // <button
-                  //   onClick={(e) => {
-                  //     e.preventDefault();
-                  //     console.log(profile, profile.id);
-                  //   }}
-                  // >
-                  //   folow
-                  // </button>
                   profile.id && (
                     <div>
                       <LikeProfile id={portfolio.id} likes={portfolio.likes} />
@@ -117,36 +122,49 @@ function Portfolio() {
                 )}
               </div>
             </div>
-            <div className="portfolio-viewPortfolio">
-              <Document file={file} onLoadSuccess={onDocumentLoadSuccess}>
-                <Page pageNumber={pageNumber} />
-              </Document>
-              <div className="portfolio-viewPortfolio-button">
-                {pageNumber > 1 ? (
-                  <button onClick={changePageBack}>
-                    <i class="fa-solid fa-angle-left"></i>
-                  </button>
-                ) : (
-                  <button style={{ opacity: "30%", cursor: "default" }}>
-                    <i class="fa-solid fa-angle-left"></i>
-                  </button>
-                )}
-                {pageNumber < numPages ? (
-                  <button onClick={changePageNext}>
-                    <i class="fa-solid fa-angle-right"></i>
-                  </button>
-                ) : (
-                  <button style={{ opacity: "30%", cursor: "default" }}>
-                    <i class="fa-solid fa-angle-right"></i>
-                  </button>
-                )}
+            <div className="portfolio-portfolio">
+              {url === "" && ( ///포트폴리오가 url이 아닌 pdf 파일일때
+                <div className="portfolio-viewPortfolio">
+                  <Document file={file} onLoadSuccess={onDocumentLoadSuccess}>
+                    <Page pageNumber={pageNumber} />
+                  </Document>
+                  <div className="portfolio-viewPortfolio-button">
+                    {pageNumber > 1 ? (
+                      <button onClick={changePageBack}>
+                        <i class="fa-solid fa-angle-left"></i>
+                      </button>
+                    ) : (
+                      <button style={{ opacity: "30%", cursor: "default" }}>
+                        <i class="fa-solid fa-angle-left"></i>
+                      </button>
+                    )}
+                    {pageNumber < numPages ? (
+                      <button onClick={changePageNext}>
+                        <i class="fa-solid fa-angle-right"></i>
+                      </button>
+                    ) : (
+                      <button style={{ opacity: "30%", cursor: "default" }}>
+                        <i class="fa-solid fa-angle-right"></i>
+                      </button>
+                    )}
+                  </div>
+                  <div className="portfolio-viewPortfolio-pagenum">
+                    Slide {pageNumber} / {numPages}
+                  </div>
+                </div>
+              )}
+              {url !== "" && ( //포트폴리오 형식이 url일대
+                <div className="portfolio-viewPortfolio">
+                  <iframe src={url} allowfullscreen />
+                </div>
+              )}
+              <div className="portfolio-viewPortfolio-introduction">
+                <span>Introduction</span>
+                <p>{portfolio.description}</p>
+                <a href={url} target="_blank" rel="noopener noreferrer">
+                  Visit the site
+                </a>
               </div>
-              <div className="portfolio-viewPortfolio-pagenum">
-                Slide {pageNumber} / {numPages}
-              </div>
-            </div>
-            <div className="portfolio-viewPortfolio-description">
-              {portfolio.description}
             </div>
           </section>
         )}
@@ -156,15 +174,16 @@ function Portfolio() {
         </section>
       </div>
       <section className="portfolio-related">
-        field: {portfolio.field}
+        <span>Similar portfolios</span>
         {/* <ListPortfolios byField={portfolio.field} numPortfolio={4} /> */}
         {portfolio.field && (
           <ListPortfolios
             byField={portfolio.field}
             viewMode={"latest"}
-            numPortfolio={4}
+            numPortfolio={numSimilar}
           />
         )}
+        {numSimilar}
       </section>
     </div>
   );

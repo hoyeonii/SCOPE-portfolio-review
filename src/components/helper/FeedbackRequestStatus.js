@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function FeedbackRequestStatus({ status, requests }) {
   const [requestListOpen, setRequestListOpen] = useState(false);
   const request = requests.filter((req) => req.status === status);
-
+  console.log(requests);
   let message = "";
   switch (status) {
     case 1:
@@ -18,7 +18,6 @@ function FeedbackRequestStatus({ status, requests }) {
   }
   return (
     <div>
-      {/* <span>status {status}</span> */}
       <span
         onClick={() => {
           setRequestListOpen(!requestListOpen);
