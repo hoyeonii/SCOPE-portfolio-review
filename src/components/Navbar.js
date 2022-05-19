@@ -18,6 +18,7 @@ import { db } from "../firebaseConfig";
 import "./css/Navbar.css";
 import { useNavigate } from "react-router-dom";
 import SignInModal from "./SignInModal";
+import logowithtext2 from "./image/그림5.png";
 
 function Navbar() {
   const [user] = useAuthState(auth);
@@ -50,11 +51,9 @@ function Navbar() {
             e.preventDefault();
             navigate("/");
           }}
-          style={{
-            cursor: "pointer",
-          }}
+          className="navbar-logo-container"
         >
-          LOGO
+          <img src={logowithtext2} alt="logo" className="navbar-logo" />
         </a>
         <a
           onClick={(e) => {
@@ -82,10 +81,10 @@ function Navbar() {
         <Link to="/portfolios">Portfolio</Link>
         <Link to="/experts">Expert</Link> */}
       </div>
-      <div className="navbar-middle">
+      {/* <div className="navbar-middle">
         <i className="fa-solid fa-magnifying-glass"></i>
         <input className="searchBar" placeholder="Search"></input>
-      </div>
+      </div> */}
 
       <div className="navbar-right">
         {user ? (
@@ -130,7 +129,7 @@ function Navbar() {
           </div>
         ) : (
           <div>
-            <Link to="/login">
+            {/* <Link to="/login">
               <button
               // onClick={() => {
               //   signOut(auth);
@@ -141,7 +140,7 @@ function Navbar() {
             </Link>
             <Link to="/register">
               <button>register</button>
-            </Link>
+            </Link> */}
             <button
               variant="secondary"
               onClick={() => {

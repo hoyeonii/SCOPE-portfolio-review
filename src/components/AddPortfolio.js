@@ -20,7 +20,7 @@ import ViewThumbnail from "./helper/ViewThumbnail";
 import { Document, Page } from "react-pdf/dist/esm/entry.webpack";
 import "./css/AddPortfolio.css";
 
-function AddPortfolio() {
+function AddPortfolio({ setSignUpModalOn }) {
   const [user] = useAuthState(auth); //로그인 했는지 확인
   // const [file, setFile] = React.useState([]);
   //   console.log(user.uid);
@@ -124,6 +124,7 @@ function AddPortfolio() {
             .then(() => {
               toast("Article added successfully", { type: "success" });
               setProgress(0);
+              setSignUpModalOn(false);
             })
             .catch((err) => {
               toast("Error adding article", { type: "error" });
@@ -352,7 +353,7 @@ function AddPortfolio() {
             <button type="submit">Upload</button>
           </form>
           <h3>Upload {fileprogress}</h3> */}
-          <button onClick={() => console.log(formData)}>show form</button>
+          {/* <button onClick={() => console.log(formData)}>show form</button> */}
           <button
             className="addPort-uploadBtn"
             onClick={(e) => handleUpload(e)}

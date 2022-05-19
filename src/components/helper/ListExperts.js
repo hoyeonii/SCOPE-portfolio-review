@@ -8,7 +8,7 @@ import "../css/ListExperts.css";
 
 import { Link } from "react-router-dom";
 import "../css/Experts.css";
-import verifiedMark from "../image/verifiedMark.jpg";
+import verifiedMark from "../image/verified-orange.png";
 import {
   doc,
   collection,

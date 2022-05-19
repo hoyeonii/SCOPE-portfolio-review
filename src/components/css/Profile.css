@@ -121,6 +121,6 @@
   border-bottom: 5px solid transparent;
 }
 .profile-tab a:hover {
-  border-bottom: 3px solid rgb(255, 217, 146);
+  border-bottom: 3px solid var(--main-light);
   color: black;
 }

@@ -73,8 +73,8 @@ function Portfolios() {
 
   const setting = {
     dragSpeed: 1.25,
-    itemWidth: 120,
-    itemHeight: 45,
+    itemWidth: 100,
+    itemHeight: 40,
     itemSideOffsets: 5,
   };
 
@@ -114,7 +114,10 @@ function Portfolios() {
         {viewMode === "trending" ? (
           <div className="home-portfolio-sortButton">
             <button
-              style={{ fontWeight: "600", borderBottom: "2px solid cadetblue" }}
+              style={{
+                fontWeight: "600",
+                borderBottom: "2px solid var(--main-dark)",
+              }}
             >
               Trending
             </button>
@@ -138,7 +141,10 @@ function Portfolios() {
             </button>
 
             <button
-              style={{ fontWeight: "600", borderBottom: "2px solid cadetblue" }}
+              style={{
+                fontWeight: "600",
+                borderBottom: "2px solid var(--main-dark)",
+              }}
             >
               Latest
             </button>
@@ -146,7 +152,7 @@ function Portfolios() {
         )}
       </div>
       <ListPortfolios byField={byField} viewMode={viewMode} />
-      
+
       {/* {viewPortfolio} */}
       {/* <div className="portfolio-list">
         {portfolios.length === 0 ? (

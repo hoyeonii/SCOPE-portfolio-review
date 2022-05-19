@@ -18,11 +18,14 @@ import LikeProfile from "./helper/LikeProfile";
 import "./css/Portfolio.css";
 import FollowProfile from "./helper/FollowProfile";
 import ListPortfolios from "./helper/ListPortfolios";
+import LoadingPage from "./helper/LoadingPage";
 
 function Portfolio() {
   const { id } = useParams();
-  const [user] = useAuthState(auth);
 
+  const [user] = useAuthState(auth);
+  const [portId, setPortId] = useState(id);
+  const [loading, setLoading] = useState(false);
   const [portfolio, setPortfolio] = useState([]);
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
@@ -34,7 +37,6 @@ function Portfolio() {
   const handleWindowResize = useCallback(() => {
     setNumSimilar(Math.floor(window.innerWidth / 300));
   }, []);
-
   useEffect(() => {
     window.addEventListener("resize", handleWindowResize);
 
@@ -42,17 +44,28 @@ function Portfolio() {
       window.removeEventListener("resize", handleWindowResize);
     };
   }, [handleWindowResize]);
+
   useEffect(() => {
-    const docRef = doc(db, "Portfolio", id);
+    console.log("rerender! " + portId);
+    const docRef = doc(db, "Portfolio", portId);
 
     onSnapshot(docRef, (snapshot) => {
       setPortfolio({ ...snapshot.data(), id: snapshot.id });
-      portfolio.url ? setUrl(portfolio.url) : setFile(portfolio.imageUrl);
+      // portfolio.url ? setUrl(portfolio.url) : setFile(portfolio.imageUrl);
     });
-  }, [file]);
+  }, [file, portId]);
 
   useEffect(() => {
     console.log(profile.id, profile);
+    // portfolio.url ? setUrl(portfolio.url) : setFile(portfolio.imageUrl);
+    if (portfolio.url) {
+      setUrl(portfolio.url);
+      setFile("");
+    } else {
+      setUrl("");
+      setFile(portfolio.imageUrl);
+      // setLoading(true);
+    }
     try {
       const profileRef = doc(db, "Profile", portfolio.userId);
       onSnapshot(profileRef, (snapshot) => {
@@ -69,6 +82,7 @@ function Portfolio() {
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
     setPageNumber(1);
+    setLoading(false);
   }
 
   function changePage(offSet) {
@@ -85,7 +99,12 @@ function Portfolio() {
 
   return (
     <div>
+      {loading && <LoadingPage />}
       <div className="portfolio-upper">
+        {loading ? "loading" : "ready"}
+        url:{url}
+        <br /> file:{file}
+        <br /> portId:{portId}
         {portfolio && (
           <section className="portfolio">
             <div className="portfolio-profile">
@@ -155,7 +174,13 @@ function Portfolio() {
               )}
               {url !== "" && ( //포트폴리오 형식이 url일대
                 <div className="portfolio-viewPortfolio">
-                  <iframe src={url} allowfullscreen />
+                  <iframe
+                    src={url}
+                    allowfullscreen
+                    onload={() => {
+                      setLoading(false);
+                    }}
+                  />
                 </div>
               )}
               <div className="portfolio-viewPortfolio-introduction">
@@ -168,9 +193,12 @@ function Portfolio() {
             </div>
           </section>
         )}
-
         <section className="portfolio-comment">
-          <Comment id={id} pageNumber={pageNumber} userId={user && user.uid} />
+          <Comment
+            id={portId}
+            pageNumber={pageNumber}
+            userId={user && user.uid}
+          />
         </section>
       </div>
       <section className="portfolio-related">
@@ -181,6 +209,7 @@ function Portfolio() {
             byField={portfolio.field}
             viewMode={"latest"}
             numPortfolio={numSimilar}
+            setPortId={setPortId}
           />
         )}
         {numSimilar}

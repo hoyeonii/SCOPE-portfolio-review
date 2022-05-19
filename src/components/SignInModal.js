@@ -24,6 +24,10 @@ import {
   addDoc,
   collection,
 } from "firebase/firestore";
+import googleLogo from "./image/google.png";
+import logo from "./image/logo.png";
+import logowithtext from "./image/logowithtext.png";
+import logowithtext2 from "./image/그림5.png";
 
 function SignInModal({ show, onHide }) {
   let navigate = useNavigate();
@@ -157,11 +161,17 @@ function SignInModal({ show, onHide }) {
         style={{
           display: "flex",
           border: "1px solid white",
-          margin: "5% 8%",
+          margin: "5%",
           height: "70vh",
         }}
       >
-        <div className="login-logo">Logo</div>
+        <div className="login-logo">
+          <img
+            src={logowithtext2}
+            alt="logo"
+            style={{ width: "50%", margin: "50% 0 0 5%" }}
+          />
+        </div>
 
         {pageMode === "login" ? (
           <div className="login">
@@ -190,26 +200,36 @@ function SignInModal({ show, onHide }) {
                 margin: "10px 0",
               }}
             />
-            <button className="login-signin" onClick={handleLogin}>
-              Log In
-            </button>
+
             <div className="login-button">
-              <div
+              <button className="login-signin" onClick={handleLogin}>
+                Log In
+              </button>
+              {/* <div className="login-continueWith"> */}
+              <button className="login-google" onClick={signInGoogle}>
+                <img
+                  src={googleLogo}
+                  alt="google"
+                  style={{ width: "20px", marginRight: "10px" }}
+                />
+                Continue with Google
+              </button>
+              {/* </div> */}
+
+              {/* <div
                 className="login-forgotPwd"
                 onClick={() => {}}
                 style={{ cursor: "pointer", textDecorationLine: "underline" }}
               >
                 Did you forget your password?
-              </div>
-              <div className="login-continueWith">
-                <button onClick={signInGoogle}>Continue with Google</button>
-              </div>
+              </div> */}
+
               <div
                 className="login-register"
                 onClick={() => {
                   setPageMode("register");
                 }}
-                style={{ cursor: "pointer" }}
+                style={{ cursor: "pointer", textDecorationLine: "underline" }}
               >
                 You don't have account yet?
               </div>

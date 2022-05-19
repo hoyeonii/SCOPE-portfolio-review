@@ -91,7 +91,7 @@ function Profile() {
       }));
       setRequestsFromme(requests);
     });
-  }, []);
+  }, [id]);
 
   const tabs = ["About Me", "Portfolio", "Saved"];
   const profileTab = (el) => {
@@ -103,7 +103,7 @@ function Profile() {
         }}
         className="profile-tabs"
         style={{
-          borderBottom: selectedTab === el && "5px solid orange",
+          borderBottom: selectedTab === el && "5px solid var(--main-dark)",
         }}
       >
         {el}

@@ -10,7 +10,7 @@ import {
 import { db } from "../../firebaseConfig";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebaseConfig";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import DeleteArticle from "./DeleteArticle";
 import LikeProfile from "./LikeProfile";
 import CommentCount from "./CommentCount";
@@ -25,10 +25,12 @@ function ListPortfolios({
   viewMode,
   requests,
   likedBy,
+  setPortId,
 }) {
   const [user] = useAuthState(auth);
   const [portfolios, setPortfolios] = useState([]);
   const [signUpModalOn, setSignUpModalOn] = useState(false);
+  let navigate = useNavigate();
 
   useEffect(() => {
     const portfolioRef = collection(db, "Portfolio");
@@ -99,21 +101,28 @@ function ListPortfolios({
   return (
     <div className="portfolios-list">
       {portfolios.length === 0 ? (
-        <span>no articles found</span>
+        <span>{portfolios.length} result(s)</span>
       ) : (
         portfolios.map((port) => (
           <div key={port.id} className="portfolios">
             <div>
-              <Link to={`/portfolio/${port.id}`}>
-                <div className="portfolios-image-container">
-                  <img
-                    src={port.thumbnail ? port.thumbnail : port.imageUrl}
-                    alt="title"
-                    className="portfolios-image"
-                  />
-                  <LikeProfile id={port.id} likes={port.likes} />
-                </div>
-              </Link>
+              {/* <Link to={`/portfolio/${port.id}`}> */}
+              <div
+                className="portfolios-image-container"
+                onClick={() => {
+                  navigate(`/portfolio/${port.id}`);
+                  setPortId(port.id);
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
+              >
+                <img
+                  src={port.thumbnail ? port.thumbnail : port.imageUrl}
+                  alt="title"
+                  className="portfolios-image"
+                />
+                <LikeProfile id={port.id} likes={port.likes} />
+              </div>
+              {/* </Link> */}
 
               <div className="portfolios-info">
                 <div className="portfolios-info-left">
@@ -165,7 +174,7 @@ function ListPortfolios({
           </div>
         ))
       )}
-      {userId && (
+      {user && userId === user.uid && (
         <div
           className="portfolios-image-container"
           style={{ margin: "10px", cursor: "pointer" }}
@@ -180,8 +189,10 @@ function ListPortfolios({
           />
         </div>
       )}
+
       <UploadPortfolioModal
         show={signUpModalOn}
+        setSignUpModalOn={setSignUpModalOn}
         onHide={() => setSignUpModalOn(false)}
       />
     </div>

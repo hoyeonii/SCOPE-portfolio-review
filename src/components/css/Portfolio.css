@@ -116,8 +116,9 @@
 .portfolio-viewPortfolio-introduction a {
   position: absolute;
   text-decoration: none;
-  color: black;
-  background-color: aqua;
+  color: white;
+  background-color: var(--main-dark);
+
   /* width: 50%; */
   border-radius: 0.3rem;
   padding: 2% 7%;
@@ -127,7 +128,7 @@
 /* comment */
 .portfolio-comment {
   /* width: 25%; */
-  border: 1px solid rosybrown;
+  /* border: 1px solid rosybrown; */
 }
 .portfolio-related > span {
   display: inline-block;

@@ -39,21 +39,22 @@ function LikeProfile({ id, likes }) {
     <div className="likeProfile">
       {user ? (
         <i
-          className={`fa-${
-            !likes?.includes(user.uid) ? "regular" : "solid"
-          } fa-heart`}
+          className={`fa-solid fa-heart`}
           style={{
             cursor: "pointer",
-            color: "red",
+            color: !likes?.includes(user.uid) ? " var(--main-dark)" : "white",
             padding: "0px 2px",
+            // textShadow: "0px 0px 2px white",
+            WebkitTextStroke: "0.5px var(--main-dark)",
           }}
           onClick={handleLike}
         ></i>
       ) : (
         <i
-          className={`fa fa-heart fa-lg`}
+          className={`fa-solid fa-heart`}
           style={{
-            color: "red",
+            color: " var(--main-dark)",
+            padding: "0px 2px",
           }}
         />
       )}

@@ -1,5 +1,11 @@
 .login-logo {
+  display: inline-block;
   width: 50%;
+  text-align: center;
+  height: 100%;
+  background-color: var(--main-lighter);
+  /* border: 1px solid rebeccapurple; */
+  /* align-items: center; */
   /* color: white; */
 }
 .login {
@@ -9,31 +15,46 @@
   border-radius: 7px;
 }
 
-.login-email {
+.login > input {
+  border: none;
+  border-bottom: 1px solid gray;
+  padding: 10px 0;
+  margin: 10px 0;
+  /* background-color: transparent; */
+  width: 100%;
+  outline: none;
+}
+/* .login-email {
   border: none;
   border-bottom: 1px solid gray;
   padding: 10px 0;
   margin: 10px 0;
   background-color: transparent;
-  border-radius: 0;
   width: 100%;
+  outline: none;
 }
 .login-password {
   width: 100%;
   border: none;
-  border-bottom: 1pxsolid gray;
+  border-bottom: 1px solid gray;
   padding: 10px 0;
   margin: 10px 0;
-}
-.login-button * {
+} */
+.login-button > * {
   width: 100%;
   text-align: center;
   font-size: 13px;
   font-weight: 600;
+  margin-top: 2%;
 }
-
+.login-google {
+  background-color: rgb(151, 151, 151);
+  padding: 3%;
+  border-radius: 0.3rem;
+}
 .login-signin {
   padding: 10px;
-  border-radius: 7px;
+  border-radius: 0.3rem;
   font-weight: 700;
+  width: 100%;
 }

@@ -15,7 +15,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: 2px solid red;
+  border: 2px solid gray;
   background-color: white;
   border-radius: 0.3rem;
   text-align: center;
@@ -31,6 +31,7 @@
 }
 .addport-input-file-container h2 {
   text-align: center;
+  color: var(--main-dark);
 }
 .addport-input-file-cover {
   display: flex;
@@ -74,7 +75,8 @@
   /* padding: 3%; */
 }
 .addport-input-text-link label {
-  background-color: aqua;
+  background-color: var(--main-dark);
+  color: white;
   padding: 3px 10px;
 }
 .addport-input-text-link input {
@@ -82,6 +84,7 @@
 }
 .addport-input-text-container > label {
   padding: 10px 0 3px;
+  font-weight: 600;
 }
 .addport-input-text-link-thumbnail {
   display: flex;
@@ -124,7 +127,7 @@
   /* height: 200px; */
   /* margin: auto; */
   overflow: hidden;
-  border: red solid 5px;
+  border: var(--main-dark) solid 2px;
 }
 .addPort-thumbnail > iframe {
   border: 0 solid;
@@ -145,5 +148,8 @@
 .addPort-uploadBtn {
   width: 100%;
   padding: 2%;
+  border: none;
   border-radius: 0.3rem;
+  background-color: var(--main-dark);
+  color: white;
 }

@@ -15,7 +15,7 @@ import { dataURItoByteString } from "react-pdf/dist/umd/shared/utils";
 import { Button, Modal } from "react-bootstrap";
 import AddPortfolio from "./AddPortfolio";
 
-function UploadPortfolioModal({ show, onHide }) {
+function UploadPortfolioModal({ show, onHide, setSignUpModalOn }) {
   let navigate = useNavigate();
   const [user] = useAuthState(auth);
 
@@ -30,7 +30,7 @@ function UploadPortfolioModal({ show, onHide }) {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <AddPortfolio />
+      <AddPortfolio setSignUpModalOn={setSignUpModalOn} />
     </Modal>
   );
 }

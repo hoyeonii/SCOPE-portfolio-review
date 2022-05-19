@@ -42,8 +42,8 @@ function Home() {
 
   const setting = {
     dragSpeed: 1.25,
-    itemWidth: 120,
-    itemHeight: 45,
+    itemWidth: 100,
+    itemHeight: 40,
     itemSideOffsets: 5,
   };
 
@@ -55,77 +55,88 @@ function Home() {
 
   return (
     <div>
-      Home
+      <div className="home-expertsList">
+        <h4>Portfolios</h4>
+        <span>
+          Explore our library of portfolio and help others by giving them
+          feedback!
+        </span>
+        <div className="carousel">
+          <Carousel _data={items} {...setting}>
+            {items.map((i, _i) => (
+              <button
+                key={_i}
+                className="item"
+                style={{ ...itemStyle }}
+                onClick={() => {
+                  // filteredField = i;
+                  setByField(i);
+                }}
+              >
+                <p>{i}</p>
+              </button>
+            ))}
+          </Carousel>
+        </div>
+        {/* <Portfolios /> */}
+        <div className="home-portfolio-button">
+          {viewMode === "trending" ? (
+            <div className="home-portfolio-sortButton">
+              <button
+                style={{
+                  fontWeight: "600",
+                  borderBottom: "2px solid var(--main-dark)",
+                }}
+              >
+                Trending
+              </button>
+
+              <button
+                onClick={() => {
+                  setViewMode("latest");
+                }}
+              >
+                Latest
+              </button>
+            </div>
+          ) : (
+            <div className="home-portfolio-sortButton">
+              <button
+                onClick={() => {
+                  setViewMode("trending");
+                }}
+              >
+                Trending
+              </button>
+
+              <button
+                style={{
+                  fontWeight: "600",
+                  borderBottom: "2px solid var(--main-dark)",
+                }}
+              >
+                Latest
+              </button>
+            </div>
+          )}
+          <Link to={`/portfolios`}>
+            <button className="home-portfolio-viewAll">{`view all >`}</button>
+          </Link>
+        </div>
+        <ListPortfolios
+          byField={byField}
+          numPortfolio={12}
+          viewMode={viewMode}
+        />
+      </div>
       <div className="home-expertsList">
         <h4>Experts</h4>
         <span>
           Our community of Experts will give you top industry advice on how to
           make your portfolio stand out
         </span>
-        <ListExperts byField={byField} numExperts={4} />
+        <ListExperts byField={byField} numExperts={12} />
       </div>
-      <h4>Portfolios</h4>
-      <span>
-        Explore our library of portfolio and help others by giving them
-        feedback!
-      </span>
-      <div className="carousel">
-        <Carousel _data={items} {...setting}>
-          {items.map((i, _i) => (
-            <button
-              key={_i}
-              className="item"
-              style={{ ...itemStyle }}
-              onClick={() => {
-                // filteredField = i;
-                setByField(i);
-              }}
-            >
-              <p>{i}</p>
-            </button>
-          ))}
-        </Carousel>
-      </div>
-      {/* <Portfolios /> */}
-      <div className="home-portfolio-button">
-        {viewMode === "trending" ? (
-          <div className="home-portfolio-sortButton">
-            <button
-              style={{ fontWeight: "600", borderBottom: "2px solid cadetblue" }}
-            >
-              Trending
-            </button>
-
-            <button
-              onClick={() => {
-                setViewMode("latest");
-              }}
-            >
-              Latest
-            </button>
-          </div>
-        ) : (
-          <div className="home-portfolio-sortButton">
-            <button
-              onClick={() => {
-                setViewMode("trending");
-              }}
-            >
-              Trending
-            </button>
-
-            <button
-              style={{ fontWeight: "600", borderBottom: "2px solid cadetblue" }}
-            >
-              Latest
-            </button>
-          </div>
-        )}
-        <Link to={`/portfolios`}>
-          <button className="home-portfolio-viewAll">{`view all >`}</button>
-        </Link>
-      </div>
-      <ListPortfolios byField={byField} numPortfolio={12} viewMode={viewMode} />
       {/* {listPortfolios} */}
       {/* <Experts /> */}
     </div>

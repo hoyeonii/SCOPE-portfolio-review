@@ -70,8 +70,8 @@ function Experts() {
 
   const setting = {
     dragSpeed: 1.25,
-    itemWidth: 120,
-    itemHeight: 45,
+    itemWidth: 100,
+    itemHeight: 40,
     itemSideOffsets: 5,
   };
 

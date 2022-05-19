@@ -1,4 +1,18 @@
+:root {
+  --main-dark: #ef4813;
+  --main-light: #ffc095;
+  --main-lighter: #fff3e2;
+  --secondary-dark: red;
+  --secondary-light: red;
+}
+
 .App {
   /* text-align: center; */
   margin: 10px 40px;
+}
+
+button {
+  background-color: var(--main-dark);
+  color: white;
+  border: none;
 }

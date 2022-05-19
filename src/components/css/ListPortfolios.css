@@ -41,6 +41,7 @@
 .portfolios-image-container {
   position: relative;
   text-align: center;
+  cursor: pointer;
 }
 .portfolios-image-container > .likeProfile {
   position: absolute;
@@ -52,11 +53,11 @@
   display: none;
 }
 .portfolios-info {
-  border: 1px solid aqua;
+  /* border: 1px solid aqua; */
 
   display: flex;
   justify-content: space-between;
-  padding: 10px 3px;
+  padding: 4% 3%;
 }
 
 .portfolios-info > div {
@@ -79,12 +80,14 @@
   font-size: 12px;
 }
 .portfolios-list > div > div {
-  border: 1px solid wheat;
+  background-color: var(--main-lighter);
+  border-radius: 0.5rem;
 }
 
 .portfolios-image {
   width: 250px;
   height: 160px;
+  padding-top: 2%;
   border-radius: 8px;
 }
 .portfolios-info-right span {

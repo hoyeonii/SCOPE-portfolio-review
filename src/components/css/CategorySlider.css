@@ -6,7 +6,7 @@ body {
 .container {
   width: 100%;
   height: 80px;
-  background: rgb(248, 240, 255);
+  /* background: rgb(248, 240, 255); */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -36,7 +36,8 @@ body {
 }
 
 .item {
-  background: rgb(255, 217, 0);
+  background-color: var(--main-light);
+  color: black;
   display: flex;
   justify-content: center;
   width: 200px;
@@ -48,11 +49,11 @@ body {
 .item p {
   position: relative;
   /* top: -5px; */
-  font-size: 15px;
-  font-weight: bold;
-  color: rgb(0, 0, 0);
+  font-size: 0.9rem;
+  font-weight: 600;
   user-select: none;
   margin: 0;
+  line-height: 1rem;
 }
 
 .item:first-child {

@@ -9,15 +9,22 @@ import {
   orderBy,
   addDoc,
   collection,
+  deleteDoc,
 } from "firebase/firestore";
-import { db } from "../firebaseConfig";
+import { toast } from "react-toastify";
+import { deleteObject, ref } from "firebase/storage";
+
+import { db, storage, auth } from "../firebaseConfig";
 import verifiedMark from "./image/verifiedMark.jpg";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 import "./css/Comment.css";
 import { Placeholder } from "react-bootstrap";
 
 function Comment({ id, pageNumber, userId }) {
   const [comments, setComments] = useState([]);
+  const [user] = useAuthState(auth); //로그인 했는지 확인
+
   const [text, setText] = useState("");
   //   const [commentRef, setCommentRef] = useState([]);
   const [profilePic, setProfilePic] = useState(
@@ -50,7 +57,7 @@ function Comment({ id, pageNumber, userId }) {
         setName(snapshot.data().displayName);
       });
     }
-  }, []);
+  }, [id]);
   //   useEffect(() => {
   //     try {
   //       const profileRef = doc(db, "Profile", userId);
@@ -76,6 +83,15 @@ function Comment({ id, pageNumber, userId }) {
       varified: varified,
       name: name,
     });
+  };
+  const handleDelete = async (commentId) => {
+    try {
+      await deleteDoc(doc(db, "Comments", commentId));
+      toast("Deleted successfully", { type: "success" });
+    } catch (err) {
+      toast("Deleting fail", { type: "error" });
+      console.log(err);
+    }
   };
   return (
     <div className="comments-container">
@@ -150,7 +166,20 @@ function Comment({ id, pageNumber, userId }) {
                       ></img>
                     )}
                   </div>
-                  <div className="comment-text">{comment.comment}</div>
+                  <span className="comment-text">{comment.comment}</span>
+                  <button
+                    className="comment-deleteBtn"
+                    onClick={() => {
+                      handleDelete(comment.id);
+                      console.log(comment.id);
+                    }}
+                    style={{
+                      display:
+                        comment.createBy === user.uid ? "inline" : "none",
+                    }}
+                  >
+                    <i class="fa-solid fa-trash-can"></i>
+                  </button>
                 </div>
               ))}
           </div>
