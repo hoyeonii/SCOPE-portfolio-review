@@ -6,11 +6,19 @@ import ListExperts from "./helper/ListExperts";
 import Carousel from "./helper/Carousel";
 import ListPortfolios from "./helper/ListPortfolios";
 import "./css/Home.css";
+import UploadPortfolioModal from "./UploadPortfolioModal";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import { auth } from "./../firebaseConfig";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 function Home() {
+  const [user] = useAuthState(auth);
+
   const [byField, setByField] = useState("All");
   const [viewMode, setViewMode] = useState("trending");
+  const [signUpModalOn, setSignUpModalOn] = useState(false);
+
   // const [listPortfolios, setListPortfolios] = useState(<div>durll</div>);
 
   // useEffect(() => {
@@ -55,8 +63,36 @@ function Home() {
 
   return (
     <div>
+      <div className="home-banner">
+        <h1>Show off your Portfolio</h1>
+        <p>
+          Your portfolio is ready, you know it's not good enough, <br />
+          but your friends are saying it's all good? <br />
+          Get brutal reviews here :)
+        </p>
+        <button
+          onClick={() => {
+            if (user) {
+              setSignUpModalOn(true);
+            } else {
+              toast("Join us to upload portfolio", { type: "information" });
+            }
+          }}
+        >
+          Upload portfolio
+        </button>
+        <img
+          src="https://edpuzzle.imgix.net/landing/color_home_teacher.png?w=2128"
+          alt="banner"
+        />
+        <UploadPortfolioModal
+          show={signUpModalOn}
+          setSignUpModalOn={setSignUpModalOn}
+          onHide={() => setSignUpModalOn(false)}
+        />
+      </div>
       <div className="home-expertsList">
-        <h4>Portfolios</h4>
+        <h3>Portfolios</h3>
         <span>
           Explore our library of portfolio and help others by giving them
           feedback!
@@ -120,7 +156,7 @@ function Home() {
             </div>
           )}
           <Link to={`/portfolios`}>
-            <button className="home-portfolio-viewAll">{`view all >`}</button>
+            <button className="home-portfolio-viewAll">{`View all >`}</button>
           </Link>
         </div>
         <ListPortfolios
@@ -130,7 +166,7 @@ function Home() {
         />
       </div>
       <div className="home-expertsList">
-        <h4>Experts</h4>
+        <h3>Experts</h3>
         <span>
           Our community of Experts will give you top industry advice on how to
           make your portfolio stand out

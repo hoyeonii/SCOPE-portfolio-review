@@ -1,3 +1,41 @@
+.home-banner {
+  position: relative;
+  height: 60vh;
+  /* border: 1px solid blue; */
+  background-color: var(--main-lighter);
+  padding: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: "Raleway", sans-serif;
+  font-weight: 600;
+}
+.home-banner h1 {
+  color: var(--main-dark);
+  font-weight: 600;
+  font-size: 3rem;
+}
+.home-banner p {
+  width: 60%;
+  font-size: 1.2rem;
+}
+.home-banner button {
+  width: 30%;
+  padding: 1%;
+  border-radius: 0.5rem;
+}
+.home-banner img {
+  position: absolute;
+  /* width: 10%; */
+  top: 0;
+  right: 0;
+  height: 100%;
+}
+.home-expertsList {
+  text-align: center;
+  padding: 5% 0;
+}
+
 .home-portfolio-button {
   display: flex;
   justify-content: space-between;

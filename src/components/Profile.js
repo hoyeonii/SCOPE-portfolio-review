@@ -166,7 +166,11 @@ function Profile() {
         <div className="profile-tab-container">
           <div className="profile-tab">{tabs.map((el) => profileTab(el))}</div>
         </div>
-        {selectedTab === "About Me" && <div>wow</div>}
+        {selectedTab === "About Me" && (
+          <div className="profile-bottom-aboutMe">
+            <p>{profile.aboutMe}</p>
+          </div>
+        )}
         {selectedTab === "Portfolio" && (
           <ListPortfolios
             byField={"All"}

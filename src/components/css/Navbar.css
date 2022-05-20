@@ -1,6 +1,7 @@
 .navbar {
-  border: 1px solid #bc8f8f;
+  border-bottom: 1px solid gray;
   padding: 0px !important;
+  margin-bottom: 2%;
 }
 .navbar-left {
   /* width: 30%;s */
@@ -61,7 +62,7 @@
 }
 
 .navbar-right {
-  width: 25%;
+  width: 15%;
 }
 .navbar-right > div {
   width: 100%;
@@ -76,4 +77,10 @@
   height: 35px;
   border-radius: 3px;
   margin-left: auto;
+}
+.navbar-right-user {
+  width: 35px;
+  border-radius: 50%;
+  border: 1px solid gray;
+  margin-right: 5%;
 }

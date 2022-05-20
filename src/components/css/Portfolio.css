@@ -13,6 +13,7 @@
   border: 1px solid rebeccapurple;
   padding: 10px 15px;
   border-radius: 10px;
+  background-color: var(--main-lighter);
 }
 .portfolio-profile-left {
   display: flex;
@@ -105,6 +106,7 @@
 .portfolio-viewPortfolio-introduction {
   padding: 3% 5%;
   position: relative;
+  min-height: 120px;
 }
 .portfolio-viewPortfolio-introduction span {
   font-size: 1.2rem;
@@ -124,6 +126,9 @@
   padding: 2% 7%;
   /* margin: 1% 15%; */
   bottom: 3%;
+}
+.portfolio-viewPortfolio-introduction a:hover {
+  color: white;
 }
 /* comment */
 .portfolio-comment {

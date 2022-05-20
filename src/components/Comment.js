@@ -175,7 +175,9 @@ function Comment({ id, pageNumber, userId }) {
                     }}
                     style={{
                       display:
-                        comment.createBy === user.uid ? "inline" : "none",
+                        user && comment.createBy === user.uid
+                          ? "inline"
+                          : "none",
                     }}
                   >
                     <i class="fa-solid fa-trash-can"></i>

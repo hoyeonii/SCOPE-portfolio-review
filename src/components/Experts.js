@@ -86,7 +86,7 @@ function Experts() {
       <div className="header">
         <h3>Experts</h3>
         <span>
-          our community of Experts will give you top industry advice on how to
+          Our community of Experts will give you top industry advice on how to
           make your portfolio stand out!
         </span>
       </div>

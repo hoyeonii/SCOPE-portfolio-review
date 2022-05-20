@@ -89,7 +89,7 @@ function Navbar() {
       <div className="navbar-right">
         {user ? (
           <div>
-            <i
+            {/* <i
               className="fa-solid fa-envelope fa-lg"
               style={{
                 cursor: "pointer",
@@ -102,18 +102,10 @@ function Navbar() {
                 cursor: "pointer",
                 color: "gold",
               }}
-            ></i>
+            ></i> */}
 
             <Link to={`/profile/${user.uid}`}>
-              <img
-                src={profileImg}
-                alt="img"
-                style={{
-                  width: "35px",
-                  borderRadius: "50%",
-                  border: "1px solid gray ",
-                }}
-              />
+              <img src={profileImg} alt="img" className="navbar-right-user" />
             </Link>
             {/* <Link to="/accountInfo">upload profile</Link> */}
 

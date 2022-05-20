@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter&family=JetBrains+Mono&family=Raleway&display=swap");
 :root {
   --main-dark: #ef4813;
   --main-light: #ffc095;
@@ -9,10 +10,15 @@
 .App {
   /* text-align: center; */
   margin: 10px 40px;
+  font-family: "Inter", sans-serif;
 }
 
 button {
   background-color: var(--main-dark);
   color: white;
   border: none;
+}
+h3 {
+  font-weight: 600 !important;
+  color: var(--main-dark);
 }

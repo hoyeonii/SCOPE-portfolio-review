@@ -99,6 +99,7 @@
 
 .profile-bottom {
   width: 88vw;
+  min-height: 30vh;
   margin: auto;
 }
 .profile-tab-container {
@@ -123,4 +124,7 @@
 .profile-tab a:hover {
   border-bottom: 3px solid var(--main-light);
   color: black;
+}
+.profile-bottom-aboutMe {
+  padding: 2% 5%;
 }

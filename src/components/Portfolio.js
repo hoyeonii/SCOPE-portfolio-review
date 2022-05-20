@@ -101,10 +101,10 @@ function Portfolio() {
     <div>
       {loading && <LoadingPage />}
       <div className="portfolio-upper">
-        {loading ? "loading" : "ready"}
+        {/* {loading ? "loading" : "ready"}
         url:{url}
         <br /> file:{file}
-        <br /> portId:{portId}
+        <br /> portId:{portId} */}
         {portfolio && (
           <section className="portfolio">
             <div className="portfolio-profile">
@@ -212,7 +212,7 @@ function Portfolio() {
             setPortId={setPortId}
           />
         )}
-        {numSimilar}
+        {/* {numSimilar} */}
       </section>
     </div>
   );

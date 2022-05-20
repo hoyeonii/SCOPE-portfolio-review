@@ -78,7 +78,7 @@ function SignInModal({ show, onHide }) {
       const profileRef = doc(db, "Profile", res.user.uid);
       onSnapshot(profileRef, (snapshot) => {
         if (snapshot._document) {
-          alert("You are already registered!");
+          // alert("You are already registered!");
         } else {
           //not registered yet
           signOut(auth);

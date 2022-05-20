@@ -89,7 +89,7 @@ function Portfolios() {
     <div>
       <div className="header">
         <h3>Portfolio</h3>
-        <span>Explore other people's portfolios and give then feedback!</span>
+        <span>Explore other people's portfolios and give them feedback!</span>
       </div>
 
       <div className="carousel">

@@ -17,6 +17,7 @@ import "./App.css";
 import ViewRequest from "./components/ViewRequest.js";
 import AddFeedback from "./components/AddFeedback.js";
 import ViewFeedback from "./components/ViewFeedback.js";
+import Footer from "./components/Footer.js";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
           <Route path="/addFeedback/:requestId" element={<AddFeedback />} />
           <Route path="/*" element={<>Page Not Found</>} />
         </Routes>
+        <Footer />
       </Router>
     </div>
   );
