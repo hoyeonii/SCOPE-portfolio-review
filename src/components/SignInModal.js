@@ -113,6 +113,7 @@ function SignInModal({ show, onHide }) {
             userId: res.user.uid,
             verifyMe: false,
             expert: false,
+            aboutMe: "",
             followers: [],
           });
         }

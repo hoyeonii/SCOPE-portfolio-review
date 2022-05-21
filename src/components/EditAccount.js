@@ -20,7 +20,7 @@ import {
 import { storage, db, auth } from "./../firebaseConfig";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-function EditAccount() {
+function EditAccount({ setSignUpModalOn }) {
   //   const { id } = useParams();
   const [user] = useAuthState(auth); //로그인 했는지 확인
   let navigate = useNavigate();
@@ -30,20 +30,24 @@ function EditAccount() {
   const [password, setPassword] = useState("");
   const [field, setField] = useState("");
   const [title, setTitle] = useState("");
+  const [career, setCareer] = useState("");
+  const [aboutMe, setAboutMe] = useState("");
   const [profile, setProfile] = useState([]);
   const [submitted, setSubmitted] = useState(0);
   const [saveButton, setSaveButton] = useState("Submit");
 
   useEffect(() => {
-    console.log(user.uid);
-    console.log(auth.currentUser);
-    console.log(auth.currentUser.password);
+    // console.log(user.uid);
+    // console.log(auth.currentUser);
+    // console.log(auth.currentUser.password);
     getDoc(doc(db, "Profile", user.uid)).then((snap) => {
       snap && setProfile(snap.data());
-      console.log(snap.data().expert);
+      // console.log(snap.data().expert);
       setDisplayName(snap.data().displayName);
       setField(snap.data().field);
       setTitle(snap.data().title);
+      setCareer(snap.data().career);
+      setAboutMe(snap.data().aboutMe);
     });
   }, []);
 
@@ -53,8 +57,6 @@ function EditAccount() {
   //     // doc.data() will be undefined in this case
   //     console.log("No such document!");
   //   }
-
-
 
   //   useEffect(() => {
   //     const profileRef = doc(db, "Profile", user.uid);
@@ -88,11 +90,12 @@ function EditAccount() {
 
   const updateValues = async () => {
     const profileRef = doc(db, "Profile", user.uid);
-    // Set the "capital" field of the city 'DC'
     await updateDoc(profileRef, {
       field: field,
       displayName: displayName,
       title: title,
+      career: career,
+      aboutMe: aboutMe,
     });
 
     updateProfile(auth.currentUser, {
@@ -105,47 +108,45 @@ function EditAccount() {
         console.error(error);
       });
 
-    updateEmail(auth.currentUser, email)
-      .then(() => {
-        console.log("Email updated!");
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    // updateEmail(auth.currentUser, email)
+    //   .then(() => {
+    //     console.log("Email updated!");
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   });
 
     // const auth = getAuth();
 
-    updatePassword(user, password)
-      .then(() => {
-        // Update successful.
-        console.log("password updated!");
-      })
-      .catch((error) => {
-        // An error ocurred
-        console.error(error);
-
-        // ...
-      });
+    // updatePassword(user, password)
+    //   .then(() => {
+    //     console.log("password updated!");
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   });
 
     console.log("updated!");
     console.log(field, title, displayName);
-    if (submitted == 1) {
-      navigate(`/profile/${user.uid}/${user.uid}`);
-      // alert("Please Log in again"); //비번 바꿨을때만
-    }
+    setSignUpModalOn(false);
+
+    // if (submitted == 1) {
+    //   // navigate(`/profile/${user.uid}/${user.uid}`);
+    //   // alert("Please Log in again"); //비번 바꿨을때만
+    // }
   };
 
-  const resetPassword = () => {
-    sendPasswordResetEmail(auth, email)
-      .then(() => {
-        console.log("Password reset email sent!");
-        // ..
-      })
-      .catch((error) => {
-        console.error(error.code);
-        // ..
-      });
-  };
+  // const resetPassword = () => {
+  //   sendPasswordResetEmail(auth, email)
+  //     .then(() => {
+  //       console.log("Password reset email sent!");
+  //       // ..
+  //     })
+  //     .catch((error) => {
+  //       console.error(error.code);
+  //       // ..
+  //     });
+  // };
 
   const items = [
     `UX/UI`,
@@ -168,27 +169,20 @@ function EditAccount() {
   return (
     <div>
       EditAccount
-      <input
+      {/* <input
         // type="text"
         name="title"
         onChange={(e) => console.log(e.target.value)}
-      ></input>
+      ></input> */}
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          if (
-            e.target[0].value &&
-            e.target[0].value !== auth.currentUser.email
-          ) {
-            alert(`Email doesn't match!`);
-          } else {
-            setValues(e).then(updateValues());
-            setSubmitted(submitted + 1);
-            setSaveButton("Save");
-          }
+        onSubmit={() => {
+          updateValues();
+          // setValues(e).then(updateValues());
+          // setSubmitted(submitted + 1);
+          // setSaveButton("Save");
         }}
       >
-        <label>
+        {/* <label>
           Current E-mail
           <input type="text" />
         </label>
@@ -208,22 +202,30 @@ function EditAccount() {
         <label>
           Confirm Password
           <input type="text" />
-        </label>
+        </label> */}
 
         {/* ////오른쪽 */}
 
         <label>
-          First Name
-          <input type="text" />
-        </label>
-        <label>
-          Last Name
-          <input type="text" />
+          User Name
+          <input
+            type="text"
+            value={displayName}
+            onChange={(e) => {
+              setDisplayName(e.target.value);
+            }}
+          />
         </label>
 
         <label type="dropbox">
-          Career Field
-          <select name="field">
+          Field
+          <select
+            name="field"
+            value={field}
+            onChange={(e) => {
+              setField(e.target.value);
+            }}
+          >
             {items.map((i) => (
               <option name={i}>{i}</option>
             ))}
@@ -231,13 +233,39 @@ function EditAccount() {
           </select>
         </label>
         <label>
-          Job Title
-          <input type="text" />
+          Title
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
+          />
+        </label>
+        <label>
+          Career
+          <input
+            type="text"
+            value={career}
+            onChange={(e) => {
+              setCareer(e.target.value);
+            }}
+          />
+        </label>
+        <label>
+          About me
+          <input
+            type="text"
+            value={aboutMe}
+            onChange={(e) => {
+              setAboutMe(e.target.value);
+            }}
+          />
         </label>
         <input type="submit" value={saveButton} />
         {submitted == 1 ? "press again to save the data" : ""}
       </form>
-      <button onClick={resetPassword}>Send me password reset email </button>
+      {/* <button onClick={resetPassword}>Send me password reset email </button>
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -268,7 +296,7 @@ function EditAccount() {
           <input type="text" />
         </label>
         <input type="submit" value="Change Password" />
-      </form>
+      </form> */}
     </div>
   );
 }

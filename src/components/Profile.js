@@ -17,7 +17,7 @@ import FollowProfile from "./helper/FollowProfile";
 import "./css/Profile.css";
 import ListPortfolios from "./helper/ListPortfolios";
 import RequestFeedback from "./RequestFeedback";
-import SignInModal from "./SignInModal";
+import EditProfileModal from "./EditProfileModal";
 
 function Profile() {
   const { id } = useParams();
@@ -32,7 +32,7 @@ function Profile() {
   const [requestsTome, setRequestsTome] = useState([]);
   const [requestsFromme, setRequestsFromme] = useState([]);
   const [selectedTab, setSelectedTab] = useState("About Me");
-  const [signUpModalOn, setSignUpModalOn] = useState(false);
+  const [editProfileModalOn, setEditProfileModalOn] = useState(false);
 
   let navigate = useNavigate();
 
@@ -149,7 +149,7 @@ function Profile() {
           {user && id == user.uid ? (
             <button
               onClick={() => {
-                navigate("/EditAccount");
+                setEditProfileModalOn(true);
               }}
             >
               Edit Profile
@@ -179,9 +179,9 @@ function Profile() {
           />
         )}
         {selectedTab === "Saved" && <ListPortfolios likedBy={id} />}
-        <SignInModal
-          show={signUpModalOn}
-          onHide={() => setSignUpModalOn(false)}
+        <EditProfileModal
+          show={editProfileModalOn}
+          onHide={() => setEditProfileModalOn(false)}
         />
 
         {/* //피드백 요청하기 */}
