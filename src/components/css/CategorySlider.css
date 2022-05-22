@@ -49,7 +49,7 @@ body {
 .item p {
   position: relative;
   /* top: -5px; */
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 600;
   user-select: none;
   margin: 0;

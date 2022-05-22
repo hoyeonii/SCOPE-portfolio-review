@@ -29,7 +29,7 @@ export default function Login() {
     >
       <div className="login-logo">Logo</div>
       <div className="login">
-        <h3>Log In</h3>
+        <h2>Log In</h2>
         {/* <div className="login-email"> */}
         <input
           type="email"

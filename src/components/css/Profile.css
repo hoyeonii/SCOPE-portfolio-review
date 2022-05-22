@@ -95,6 +95,7 @@
   border-radius: 7px;
   font-size: 14px;
   font-weight: 500;
+  outline: none;
 }
 
 .profile-bottom {
@@ -126,5 +127,5 @@
   color: black;
 }
 .profile-bottom-aboutMe {
-  padding: 2% 5%;
+  padding: 2% 3%;
 }

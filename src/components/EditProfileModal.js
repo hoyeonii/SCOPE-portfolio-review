@@ -15,7 +15,7 @@ import { dataURItoByteString } from "react-pdf/dist/umd/shared/utils";
 import { Button, Modal } from "react-bootstrap";
 import EditAccount from "./EditAccount";
 
-function EditProfileModal({ show, onHide, setSignUpModalOn }) {
+function EditProfileModal({ show, onHide }) {
   let navigate = useNavigate();
   const [user] = useAuthState(auth);
 
@@ -30,7 +30,7 @@ function EditProfileModal({ show, onHide, setSignUpModalOn }) {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <EditAccount setSignUpModalOn={setSignUpModalOn} />
+      <EditAccount onHide={onHide} />
     </Modal>
   );
 }

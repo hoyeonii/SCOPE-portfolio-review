@@ -103,7 +103,7 @@ function Navbar() {
                 color: "gold",
               }}
             ></i> */}
-
+            <span>Welcome, {profile.displayName}</span>
             <Link to={`/profile/${user.uid}`}>
               <img src={profileImg} alt="img" className="navbar-right-user" />
             </Link>

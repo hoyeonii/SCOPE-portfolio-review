@@ -19,8 +19,11 @@ import {
 } from "firebase/auth";
 import { storage, db, auth } from "./../firebaseConfig";
 import { useAuthState } from "react-firebase-hooks/auth";
+import "./css/EditAccount.css";
+import { toast } from "react-toastify";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
-function EditAccount({ setSignUpModalOn }) {
+function EditAccount({ onHide }) {
   //   const { id } = useParams();
   const [user] = useAuthState(auth); //로그인 했는지 확인
   let navigate = useNavigate();
@@ -32,6 +35,8 @@ function EditAccount({ setSignUpModalOn }) {
   const [title, setTitle] = useState("");
   const [career, setCareer] = useState("");
   const [aboutMe, setAboutMe] = useState("");
+  const [profileImg, setProfileImg] = useState("");
+  const [changeImg, setChangeImg] = useState(false);
   const [profile, setProfile] = useState([]);
   const [submitted, setSubmitted] = useState(0);
   const [saveButton, setSaveButton] = useState("Submit");
@@ -89,24 +94,67 @@ function EditAccount({ setSignUpModalOn }) {
   };
 
   const updateValues = async () => {
-    const profileRef = doc(db, "Profile", user.uid);
-    await updateDoc(profileRef, {
-      field: field,
-      displayName: displayName,
-      title: title,
-      career: career,
-      aboutMe: aboutMe,
-    });
+    if (changeImg) {
+      const storageRef = ref(
+        storage,
+        `/profileImage/${Date.now()}${profileImg.name}` //뭐가 안되면 files를 image로 바꿔야할수도?
+      );
 
-    updateProfile(auth.currentUser, {
-      displayName: displayName,
-    })
-      .then(() => {
-        console.log("displayName updated!");
-      })
-      .catch((error) => {
-        console.error(error);
+      const uploadTask = uploadBytesResumable(storageRef, profileImg);
+
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          // const progressPercent = Math.round(
+          //   (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          // );
+          // setProgress(progressPercent);
+        },
+        (err) => {
+          console.log(err);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+            // const articleRef = collection(db, "Profile");
+            setDoc(doc(db, "Profile", user.uid), {
+              // 여기 addDoc으로 고쳐야할수도
+              field: field,
+              displayName: displayName,
+              title: title,
+              career: career,
+              aboutMe: aboutMe,
+              imageUrl: url,
+            })
+              .then(() => {
+                toast("Profile updated", { type: "success" });
+                // setProgress(0);
+              })
+              .catch((err) => {
+                toast("Error adding Profile", { type: "error" });
+              });
+          });
+        }
+      );
+    } else {
+      const profileRef = doc(db, "Profile", user.uid);
+      await updateDoc(profileRef, {
+        field: field,
+        displayName: displayName,
+        title: title,
+        career: career,
+        aboutMe: aboutMe,
       });
+
+      updateProfile(auth.currentUser, {
+        displayName: displayName,
+      })
+        .then(() => {
+          toast("Profile updated", { type: "success" });
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
 
     // updateEmail(auth.currentUser, email)
     //   .then(() => {
@@ -126,9 +174,7 @@ function EditAccount({ setSignUpModalOn }) {
     //     console.error(error);
     //   });
 
-    console.log("updated!");
-    console.log(field, title, displayName);
-    setSignUpModalOn(false);
+    onHide();
 
     // if (submitted == 1) {
     //   // navigate(`/profile/${user.uid}/${user.uid}`);
@@ -151,24 +197,21 @@ function EditAccount({ setSignUpModalOn }) {
   const items = [
     `UX/UI`,
     `3D`,
-    `Game Design`,
+    `Game Art`,
     `Photography`,
-    `Web`,
-    `Web Design`,
+    `Website Design`,
     `Illustration`,
-    `fashion`,
-    `industry design`,
-    `i can't`,
-    `think of`,
-    `more items`,
-    `ㅇㅂㅇ`,
-    "3",
-    "2",
-    "1",
+    `Fashion`,
+    `Logo Design`,
+    `Video Edit`,
+    `Industrial Design`,
+    `Storyboards`,
+    `Photoshop Editing`,
+    "Modeling",
   ];
   return (
-    <div>
-      EditAccount
+    <div className="editAccount">
+      <h2>Edit Profile</h2>
       {/* <input
         // type="text"
         name="title"
@@ -205,7 +248,23 @@ function EditAccount({ setSignUpModalOn }) {
         </label> */}
 
         {/* ////오른쪽 */}
-
+        <label>
+          Image
+          <input
+            type="file"
+            name="image"
+            onChange={(e) => {
+              setProfileImg(e.target.files[0]);
+              setChangeImg(true);
+            }}
+          ></input>
+        </label>
+        
+        {/* {progress === 0 ? null : (
+          <div className="progress">
+            <div>{`uploading image ${progress}%`}</div>
+          </div>
+        )} */}
         <label>
           User Name
           <input
@@ -254,17 +313,28 @@ function EditAccount({ setSignUpModalOn }) {
         </label>
         <label>
           About me
-          <input
+          <textarea
             type="text"
             value={aboutMe}
             onChange={(e) => {
               setAboutMe(e.target.value);
             }}
+            // style={{ height: "20vh" }}
           />
         </label>
-        <input type="submit" value={saveButton} />
-        {submitted == 1 ? "press again to save the data" : ""}
+        <input type="submit" className="editAccount-submitInput" />
       </form>
+      <button
+        // type="submit"
+        className="editAccount-submitBtn"
+        onClick={() => {
+          updateValues();
+          // console.log("whyyy");
+        }}
+      >
+        Submit
+      </button>
+      {/* {submitted == 1 ? "press again to save the data" : ""} */}
       {/* <button onClick={resetPassword}>Send me password reset email </button>
       <form
         onSubmit={(e) => {

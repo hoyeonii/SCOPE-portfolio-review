@@ -14,8 +14,8 @@
   text-decoration: none;
   padding: 3%;
   border-top: 4px solid transparent;
-
   border-bottom: 4px solid transparent;
+  font-weight: 600;
 }
 .navbar-left > a:hover {
   border-bottom: 4px solid var(--main-dark);
@@ -51,7 +51,7 @@
 }
 
 .navbar-middle {
-  width: 40%;
+  /* width: 40%; */
   border-radius: 50px;
 }
 .navbar-middle * {
@@ -62,7 +62,7 @@
 }
 
 .navbar-right {
-  width: 15%;
+  /* width: 15%; */
 }
 .navbar-right > div {
   width: 100%;
@@ -70,7 +70,12 @@
   justify-content: space-between;
   align-items: center;
 }
-
+.navbar-right > div > * {
+  padding: 3%;
+}
+/* .navbar-right > div span {
+  white-space: nowrap;
+} */
 .navbar-right button {
   font-size: 13px;
   width: 90px;
@@ -80,6 +85,7 @@
 }
 .navbar-right-user {
   width: 35px;
+  height: 35px;
   border-radius: 50%;
   border: 1px solid gray;
   margin-right: 5%;

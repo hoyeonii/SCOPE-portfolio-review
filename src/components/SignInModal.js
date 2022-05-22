@@ -43,15 +43,19 @@ function SignInModal({ show, onHide }) {
   const [signUpWith, setSignUpWith] = useState(null);
 
   const fields = [
-    "UX/UI",
-    "Photography",
+    `UX/UI`,
+    `3D`,
+    `Game Art`,
+    `Photography`,
+    `Website Design`,
+    `Illustration`,
+    `Fashion`,
+    `Logo Design`,
+    `Video Edit`,
+    `Industrial Design`,
+    `Storyboards`,
+    `Photoshop Editing`,
     "Modeling",
-    "VFX",
-    "Film",
-    "Programming",
-    "Animation",
-    "Illustration",
-    "Product Design",
   ];
 
   const handleLogin = async () => {
@@ -68,6 +72,35 @@ function SignInModal({ show, onHide }) {
       updateProfile(auth.currentUser, {
         displayName: name,
       });
+      const profileRef = doc(db, "Profile", auth.currentUser.uid);
+
+      onSnapshot(profileRef, (snapshot) => {
+        // console.log(snapshot);
+        // console.log(snapshot._document);
+        if (snapshot._document) {
+          // alert("You are already registered!");
+        } else {
+          //not registered yet
+          // alert("You are not registered!");
+          const proRef = doc(db, "Profile", auth.currentUser.uid);
+          setDoc(proRef, {
+            title: title,
+            career: career,
+            field: field,
+            imageUrl:
+              "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png",
+            createDate: Timestamp.now().toDate(),
+            displayName: auth.currentUser.displayName,
+            userId: auth.currentUser.uid,
+            verifyMe: false,
+            expert: false,
+            aboutMe: "",
+            followers: [],
+          });
+        }
+        // setPortfolio({ ...snapshot.data(), id: snapshot.id });
+      });
+
       navigate("/");
     } catch (err) {
       toast(err.code, { type: "error" });
@@ -98,10 +131,10 @@ function SignInModal({ show, onHide }) {
         // console.log(snapshot);
         // console.log(snapshot._document);
         if (snapshot._document) {
-          alert("You are already registered!");
+          // alert("You are already registered!");
         } else {
           //not registered yet
-          alert("You are not registered!");
+          // alert("You are not registered!");
           const proRef = doc(db, "Profile", res.user.uid);
           setDoc(proRef, {
             title: title,
@@ -243,75 +276,88 @@ function SignInModal({ show, onHide }) {
             <div>
               {!signUpWith && (
                 <div className="login-continueWith">
-                  <button
-                    onClick={() => {
-                      setSignUpWith("google");
-                    }}
-                  >
+                  <label>
+                    Name
+                    <input
+                      type="text"
+                      onChange={(e) => {
+                        setName(e.target.value);
+                      }}
+                    ></input>
+                  </label>
+
+                  <label>
+                    E-mail adress
+                    <input
+                      type="email"
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                      }}
+                    ></input>
+                  </label>
+
+                  <label>
+                    Password
+                    <input
+                      type="password"
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                      }}
+                    ></input>
+                  </label>
+                  <span className="login-or">or</span>
+                  <button className="login-google" onClick={signInGoogle}>
+                    <img
+                      src={googleLogo}
+                      alt="google"
+                      style={{ width: "20px", marginRight: "10px" }}
+                    />
                     Continue with Google
                   </button>
-                  <button
-                    onClick={() => {
-                      setSignUpWith("facebook");
-                    }}
-                  >
-                    Continue with Facebook
-                  </button>
-
-                  <label>Name</label>
-                  <input
-                    type="text"
-                    onChange={(e) => {
-                      setName(e.target.value);
-                    }}
-                  ></input>
-
-                  <label>E-mail adress</label>
-                  <input
-                    type="email"
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                    }}
-                  ></input>
-
-                  <label>Password</label>
-                  <input
-                    type="password"
-                    onChange={(e) => {
-                      setPassword(e.target.value);
-                    }}
-                  ></input>
+                  {/* <button
+                onClick={() => {
+                  setSignUpWith("facebook");
+                }}
+              >
+                Continue with Facebook
+              </button> */}
                 </div>
               )}
-
               <label>Select your field</label>
-              {fields.map((el) => (
-                <label
-                  onClick={() => setField(el)}
-                  style={{ backgroundColor: el === field ? "yellow" : "" }}
-                >
-                  {el}
-                </label>
-              ))}
+              <select className="login-field">
+                {fields.map((el) => (
+                  <option
+                    onClick={() => setField(el)}
+                    style={{ backgroundColor: el === field ? "yellow" : "" }}
+                  >
+                    {el}
+                  </option>
+                ))}
+              </select>
 
-              <label>Job title</label>
-              <input
-                type="text"
-                onChange={(e) => {
-                  setTitle(e.target.value);
-                }}
-              ></input>
+              <label>
+                Job title
+                <input
+                  type="text"
+                  onChange={(e) => {
+                    setTitle(e.target.value);
+                  }}
+                ></input>
+              </label>
 
-              <label>Career</label>
-              <input
-                type="text"
-                onChange={(e) => {
-                  setCareer(e.target.value);
-                }}
-              ></input>
+              <label>
+                Career
+                <input
+                  type="text"
+                  onChange={(e) => {
+                    setCareer(e.target.value);
+                  }}
+                ></input>
+              </label>
             </div>
 
             <button
+              className="login-signin"
               onClick={() => {
                 if (signUpWith === "google") {
                   signUpGoogle();

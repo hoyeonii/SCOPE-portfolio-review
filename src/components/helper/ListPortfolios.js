@@ -17,6 +17,7 @@ import CommentCount from "./CommentCount";
 import FeedbackRequestStatus from "./FeedbackRequestStatus";
 import "../css/ListPortfolios.css";
 import UploadPortfolioModal from "../UploadPortfolioModal";
+import upload from "../image/upload.png";
 
 function ListPortfolios({
   byField,
@@ -100,52 +101,45 @@ function ListPortfolios({
 
   return (
     <div className="portfolios-list">
-      {portfolios.length === 0 ? (
-        <span>{portfolios.length} result(s)</span>
-      ) : (
-        portfolios.map((port) => (
-          <div key={port.id} className="portfolios">
-            <div>
-              {/* <Link to={`/portfolio/${port.id}`}> */}
-              <div
-                className="portfolios-image-container"
-                onClick={() => {
-                  navigate(`/portfolio/${port.id}`);
-                  setPortId(port.id);
-                  window.scrollTo({ top: 0, behavior: "smooth" });
-                }}
-              >
-                <img
-                  src={port.thumbnail ? port.thumbnail : port.imageUrl}
-                  alt="title"
-                  className="portfolios-image"
-                />
-                <LikeProfile id={port.id} likes={port.likes} />
+      {portfolios.map((port) => (
+        <div key={port.id} className="portfolios">
+          <div>
+            {/* <Link to={`/portfolio/${port.id}`}> */}
+            <div
+              className="portfolios-image-container"
+              onClick={() => {
+                navigate(`/portfolio/${port.id}`);
+                setPortId(port.id);
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+            >
+              <img
+                src={port.thumbnail ? port.thumbnail : port.imageUrl}
+                alt="title"
+                className="portfolios-image"
+              />
+              <LikeProfile id={port.id} likes={port.likes} />
+            </div>
+            {/* </Link> */}
+
+            <div className="portfolios-info">
+              <div className="portfolios-info-left">
+                <img src={port.profileImg} alt="" className="portfolios-pic" />
+
+                <span>{port.createBy}</span>
               </div>
-              {/* </Link> */}
+              <div className="portfolios-info-right">
+                <LikeProfile id={port.id} likes={port.likes} />
 
-              <div className="portfolios-info">
-                <div className="portfolios-info-left">
-                  <img
-                    src={port.profileImg}
-                    alt=""
-                    className="portfolios-pic"
-                  />
+                <CommentCount id={port.id} />
 
-                  <span>{port.createBy}</span>
-                </div>
-                <div className="portfolios-info-right">
-                  <LikeProfile id={port.id} likes={port.likes} />
-
-                  <CommentCount id={port.id} />
-
-                  {/* {user && user.uid === port.userId && (
+                {/* {user && user.uid === port.userId && (
                       <DeleteArticle id={port.id} imageUrl={port.imageUrl} />
                     )} */}
-                </div>
               </div>
             </div>
-            {/* {requests && (
+          </div>
+          {/* {requests && (
               <div className="portfolios-feedback">
                 <button
                   onClick={() => {
@@ -171,9 +165,9 @@ function ListPortfolios({
                 />
               </div>
             )} */}
-          </div>
-        ))
-      )}
+        </div>
+      ))}
+
       {user && userId === user.uid && (
         <div
           className="portfolios-image-container"
@@ -182,11 +176,7 @@ function ListPortfolios({
             setSignUpModalOn(true);
           }}
         >
-          <img
-            src="https://cdn.pixabay.com/photo/2017/11/10/05/24/add-2935429_960_720.png"
-            alt="title"
-            className="portfolios-image"
-          />
+          <img src={upload} alt="title" className="portfolios-image" />
         </div>
       )}
 

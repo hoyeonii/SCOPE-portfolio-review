@@ -1,0 +1,34 @@
+.editAccount {
+  /* border: 1px solid salmon; */
+  /* padding: 5%; */
+}
+.editAccount h2 {
+  text-align: center;
+  color: var(--main-dark);
+  padding: 3% 0;
+}
+.editAccount form {
+  display: flex;
+  flex-direction: column;
+}
+.editAccount label {
+  padding: 10px 5% 0;
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+}
+.editAccount input {
+  margin-top: 3px;
+}
+.editAccount-submitInput {
+  display: none;
+}
+.editAccount-submitBtn {
+  width: 100%;
+  padding: 2%;
+  margin-top: 3%;
+  border: none;
+  border-radius: 0.3rem;
+  background-color: var(--main-dark);
+  color: white;
+}

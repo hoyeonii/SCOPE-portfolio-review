@@ -13,8 +13,13 @@
   width: 50%;
   padding: 5%;
   border-radius: 7px;
+  height: 100%;
+  overflow-y: scroll;
 }
-
+.login-continueWith {
+  border-bottom: 2px dashed var(--main-dark);
+  padding-bottom: 10%;
+}
 .login > input {
   border: none;
   border-bottom: 1px solid gray;
@@ -47,14 +52,46 @@
   font-weight: 600;
   margin-top: 2%;
 }
+.login-or {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
 .login-google {
   background-color: rgb(151, 151, 151);
   padding: 3%;
   border-radius: 0.3rem;
+  width: 100%;
+  /* margin: 0 5%; */
 }
 .login-signin {
   padding: 10px;
   border-radius: 0.3rem;
   font-weight: 700;
   width: 100%;
+  margin-top: 5%;
+}
+.login h2 {
+  text-align: center;
+  color: var(--main-dark);
+  padding: 3% 0;
+}
+.login form {
+  display: flex;
+  flex-direction: column;
+}
+.login label {
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+}
+.login input {
+  margin-top: 3px;
+  border: none;
+  border-bottom: 1px solid gray;
+  outline: none;
+}
+.login select {
+  margin-top: 3%;
 }

@@ -133,7 +133,7 @@ class Carousel extends React.Component {
           className="cWrapper"
           style={{
             ...cWrapperStyle,
-            transform: "translateX(900px)",
+            transform: "translateX(300px)",
           }}
         >
           {this.props.children}

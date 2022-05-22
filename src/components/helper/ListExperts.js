@@ -49,7 +49,7 @@ function ListExperts({ byField, numExperts }) {
   }, [byField]);
   return (
     <div>
-      ListExperts {byField}
+      {/* ListExperts {byField} */}
       <div className="profileList">
         {!profiles ? (
           <div>no matching experts</div>

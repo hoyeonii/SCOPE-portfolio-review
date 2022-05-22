@@ -7,6 +7,7 @@
   margin: 3%;
   background-color: cornsilk;
   border-radius: 7px;
+  box-shadow: 2px 2px 2px gainsboro;
 }
 .profileList-info a {
   text-decoration: none;
