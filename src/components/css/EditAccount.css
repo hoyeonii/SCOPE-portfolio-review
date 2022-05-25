@@ -32,3 +32,11 @@
   background-color: var(--main-dark);
   color: white;
 }
+/* tablet */
+@media screen and (max-width: 1023px) {
+
+}
+/* mobile */
+@media screen and (max-width: 768px) {
+
+}

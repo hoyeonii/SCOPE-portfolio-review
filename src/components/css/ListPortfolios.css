@@ -94,3 +94,11 @@
 .portfolios-info-right span {
   font-size: 13px;
 }
+/* tablet */
+@media screen and (max-width: 1023px) {
+
+}
+/* mobile */
+@media screen and (max-width: 768px) {
+
+}

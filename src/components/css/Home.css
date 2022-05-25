@@ -14,10 +14,12 @@
   color: var(--main-dark);
   font-weight: 600;
   font-size: 3rem;
+  z-index: 1;
 }
 .home-banner p {
   width: 60%;
   font-size: 1.2rem;
+  z-index: 1;
 }
 .home-banner button {
   width: 30%;
@@ -60,4 +62,34 @@
   border: none;
   background-color: var(--main-dark);
   color: white;
+}
+/* tablet */
+@media screen and (max-width: 1023px) {
+  .home-banner {
+    height: 40vh;
+  }
+  .home-banner h1 {
+    font-size: 2rem;
+  }
+  .home-banner p {
+    font-size: 1rem;
+  }
+}
+/* mobile */
+@media screen and (max-width: 768px) {
+  .home-banner h1 {
+    font-size: 1.5rem;
+  }
+  .home-banner p {
+    font-size: 0.9rem;
+    width: 100%;
+  }
+  .home-banner img {
+    top: auto;
+    bottom: 0;
+    height: 50%;
+  }
+  .home-banner button {
+    width: 50%;
+  }
 }
