@@ -4,13 +4,14 @@
 }
 .portfolio {
   /* width: 75%; */
-  border: 1px solid cadetblue;
+  border-radius: 10px;
+  box-shadow: 0px 1px 5px gray;
 }
 .portfolio-profile {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  border: 1px solid rebeccapurple;
+  /* border: 1px solid rebeccapurple; */
   padding: 10px 15px;
   border-radius: 10px;
   background-color: var(--main-lighter);
@@ -43,7 +44,7 @@
 }
 .portfolio-viewPortfolio {
   position: relative;
-  padding: 1%;
+  padding: 3%;
 }
 .portfolio-viewPortfolio-button {
   display: flex;
@@ -104,7 +105,7 @@
 }
 
 .portfolio-viewPortfolio-introduction {
-  padding: 3% 5%;
+  padding: 10% 5%;
   position: relative;
   min-height: 120px;
 }
@@ -120,12 +121,12 @@
   text-decoration: none;
   color: white;
   background-color: var(--main-dark);
-
+  font-size: 0.9rem;
   /* width: 50%; */
   border-radius: 0.3rem;
   padding: 2% 7%;
   /* margin: 1% 15%; */
-  bottom: 3%;
+  bottom: 5%;
 }
 .portfolio-viewPortfolio-introduction a:hover {
   color: white;
@@ -138,6 +139,5 @@
 .portfolio-related > span {
   display: inline-block;
   padding: 1% 3% 0%;
-  font-size: 20px;
   font-weight: 700;
 }
