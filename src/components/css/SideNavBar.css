@@ -1,0 +1,20 @@
+.sidenavbar {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: auto;
+  position: absolute;
+  /* background-color: var(--main-lighter); */
+  width: 100%;
+  left: 0;
+  /* padding: 3% 0; */
+}
+.sidenavbar > a {
+  background-color: var(--main-lighter);
+  padding: 2%;
+}
+.sidenavbar-background {
+  height: 100vh;
+  background-color: black;
+  opacity: 0.5;
+}

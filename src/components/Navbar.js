@@ -19,12 +19,14 @@ import "./css/Navbar.css";
 import { useNavigate } from "react-router-dom";
 import SignInModal from "./SignInModal";
 import logowithtext2 from "./image/그림5.png";
+import SideNavBar from "./SideNavBar";
 
 function Navbar() {
   const [user] = useAuthState(auth);
   const [profile, setProfile] = useState({});
   const [profileImg, setProfileImg] = useState(null);
   const [signUpModalOn, setSignUpModalOn] = useState(false);
+  const [sideNavOpen, setSideNavOpen] = useState(false);
   let navigate = useNavigate();
   // console.log(user);
   useEffect(() => {
@@ -80,6 +82,12 @@ function Navbar() {
         {/* <Link to="/">LOGO</Link>
         <Link to="/portfolios">Portfolio</Link>
         <Link to="/experts">Expert</Link> */}
+        <i
+          class="fa-solid fa-bars"
+          onClick={() => {
+            setSideNavOpen(!sideNavOpen);
+          }}
+        ></i>
       </div>
       {/* <div className="navbar-middle">
         <i className="fa-solid fa-magnifying-glass"></i>
@@ -147,6 +155,12 @@ function Navbar() {
             />
           </div>
         )}
+      </div>
+      <div
+        className="navbar-side"
+        style={{ display: sideNavOpen ? "flex" : "none" }}
+      >
+        <SideNavBar setSignUpModalOn={setSignUpModalOn} />
       </div>
     </div>
   );

@@ -77,6 +77,9 @@
 }
 /* mobile */
 @media screen and (max-width: 768px) {
+  .home-banner {
+    padding: 7% 5%;
+  }
   .home-banner h1 {
     font-size: 1.5rem;
   }
