@@ -21,7 +21,7 @@ import SignInModal from "./SignInModal";
 import logowithtext2 from "./image/그림5.png";
 import "./css/SideNavBar.css";
 
-function SideNavBar({ setSignUpModalOn }) {
+function SideNavBar({ setSignUpModalOn, setSideNavOpen }) {
   const [user] = useAuthState(auth);
   const [profile, setProfile] = useState({});
   let navigate = useNavigate();

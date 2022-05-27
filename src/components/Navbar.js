@@ -46,7 +46,12 @@ function Navbar() {
   // }, [profile]);
 
   return (
-    <div className="navbar">
+    <div
+      className="navbar"
+      onClick={() => {
+        setSideNavOpen(false);
+      }}
+    >
       <div className="navbar-left">
         <a
           onClick={(e) => {
@@ -84,7 +89,8 @@ function Navbar() {
         <Link to="/experts">Expert</Link> */}
         <i
           class="fa-solid fa-bars"
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             setSideNavOpen(!sideNavOpen);
           }}
         ></i>
@@ -160,7 +166,10 @@ function Navbar() {
         className="navbar-side"
         style={{ display: sideNavOpen ? "flex" : "none" }}
       >
-        <SideNavBar setSignUpModalOn={setSignUpModalOn} />
+        <SideNavBar
+          setSignUpModalOn={setSignUpModalOn}
+          setSideNavOpen={setSideNavOpen}
+        />
       </div>
     </div>
   );

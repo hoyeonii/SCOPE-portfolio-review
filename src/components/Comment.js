@@ -132,7 +132,7 @@ function Comment({ id, pageNumber, userId }) {
           </form>
         </div>
       ) : (
-        <div>Log in to leave comment</div>
+        <div className="comments-input">Log in to leave comment</div>
       )}
       <div className="comments">
         <span className="comments-count"> Comment {comments.length}</span>

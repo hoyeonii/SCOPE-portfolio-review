@@ -143,9 +143,14 @@
 }
 /* tablet */
 @media screen and (max-width: 1023px) {
-
 }
 /* mobile */
 @media screen and (max-width: 768px) {
-
+  .portfolio-portfolio {
+    display: flex;
+    flex-direction: column;
+  }
+  .portfolio-viewPortfolio-introduction {
+    padding: 0 2%;
+  }
 }

@@ -14,7 +14,7 @@
   color: var(--main-dark);
   font-weight: 600;
   font-size: 3rem;
-  z-index: 1;
+  /* z-index: 1; */
 }
 .home-banner p {
   width: 60%;
@@ -33,6 +33,7 @@
   top: 0;
   right: 0;
   height: 100%;
+  /* z-index: 1; */
 }
 .home-expertsList {
   text-align: center;
