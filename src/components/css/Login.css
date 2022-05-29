@@ -97,9 +97,13 @@
 }
 /* tablet */
 @media screen and (max-width: 1023px) {
-
 }
 /* mobile */
 @media screen and (max-width: 768px) {
-
+  .login-logo {
+    display: none;
+  }
+  .login {
+    width: 100%;
+  }
 }

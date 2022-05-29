@@ -87,13 +87,18 @@ function Navbar() {
         {/* <Link to="/">LOGO</Link>
         <Link to="/portfolios">Portfolio</Link>
         <Link to="/experts">Expert</Link> */}
-        <i
-          class="fa-solid fa-bars"
-          onClick={(e) => {
-            e.stopPropagation();
-            setSideNavOpen(!sideNavOpen);
-          }}
-        ></i>
+        <div className="navbar-left-mobileVer">
+          <Link to={`/profile/${user.uid}`}>
+            <img src={profileImg} alt="img" className="navbar-right-user" />
+          </Link>
+          <i
+            class="fa-solid fa-bars"
+            onClick={(e) => {
+              e.stopPropagation();
+              setSideNavOpen(!sideNavOpen);
+            }}
+          ></i>
+        </div>
       </div>
       {/* <div className="navbar-middle">
         <i className="fa-solid fa-magnifying-glass"></i>
