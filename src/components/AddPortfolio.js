@@ -6,6 +6,7 @@ import {
   orderBy,
   query,
   where,
+  doc,
 } from "firebase/firestore";
 import React, { useState, useCallback, useRef } from "react";
 import { toPng } from "html-to-image";
@@ -23,7 +24,7 @@ import "./css/AddPortfolio.css";
 function AddPortfolio({ setSignUpModalOn }) {
   const [user] = useAuthState(auth); //로그인 했는지 확인
   // const [file, setFile] = React.useState([]);
-  //   console.log(user.uid);
+  console.log(user.uid);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -37,13 +38,14 @@ function AddPortfolio({ setSignUpModalOn }) {
   //   const [fileprogress, setFileprogress] = useState(0);
 
   ///firebase Profile 테이블에서 해당 유저 데이터 가져오기
-  const profileRef = collection(db, "Profile");
-  const q = query(profileRef, where("userId", "==", user.uid));
+  const profileRef = doc(db, "Profile", user.uid);
+  // const q = query(profileRef, where("userId", "==", user.uid));
   let userProfile = [];
-  onSnapshot(q, (snapshot) => {
-    snapshot.docs.forEach((doc) => {
-      userProfile.push({ ...doc.data(), id: doc.id });
-    });
+  onSnapshot(profileRef, (snapshot) => {
+    console.log(snapshot.data());
+
+    userProfile.push(snapshot.data());
+
     // console.log(userProfile[0].field);
   });
 
@@ -106,6 +108,7 @@ function AddPortfolio({ setSignUpModalOn }) {
         });
 
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+          console.log(userProfile);
           const articleRef = collection(db, "Portfolio");
           addDoc(articleRef, {
             title: formData.title,

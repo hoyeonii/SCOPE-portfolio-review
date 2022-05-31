@@ -69,8 +69,8 @@
 
 .profile-follow {
   display: flex;
-  align-content: center;
-  justify-content: center;
+  /* align-content: center;
+  justify-content: center; */
   align-items: center;
 }
 

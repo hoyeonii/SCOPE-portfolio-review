@@ -127,6 +127,7 @@ function EditAccount({ onHide }) {
             })
               .then(() => {
                 toast("Profile updated", { type: "success" });
+                onHide();
                 // setProgress(0);
               })
               .catch((err) => {
@@ -150,6 +151,7 @@ function EditAccount({ onHide }) {
       })
         .then(() => {
           toast("Profile updated", { type: "success" });
+          onHide();
         })
         .catch((error) => {
           console.error(error);
@@ -173,8 +175,6 @@ function EditAccount({ onHide }) {
     //   .catch((error) => {
     //     console.error(error);
     //   });
-
-    onHide();
 
     // if (submitted == 1) {
     //   // navigate(`/profile/${user.uid}/${user.uid}`);
@@ -259,7 +259,7 @@ function EditAccount({ onHide }) {
             }}
           ></input>
         </label>
-        
+
         {/* {progress === 0 ? null : (
           <div className="progress">
             <div>{`uploading image ${progress}%`}</div>
