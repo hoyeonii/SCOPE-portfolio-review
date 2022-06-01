@@ -27,6 +27,7 @@ function ListPortfolios({
   requests,
   likedBy,
   setPortId,
+  curPortId,
 }) {
   const [user] = useAuthState(auth);
   const [portfolios, setPortfolios] = useState([]);
@@ -58,12 +59,22 @@ function ListPortfolios({
       } else {
         //필드 지정했을때
         console.log(44444444);
+        // if (curPortId) {
+        //   q = query(
+        //     portfolioRef,
+        //     where("field", "==", byField),
+        //     where("id", "!=", curPortId),
+        //     orderBy("createDate", "desc"),
+        //     limit(numPortfolio)
+        //   );
+        // } else {
         q = query(
           portfolioRef,
           where("field", "==", byField),
           orderBy("createDate", "desc"),
           limit(numPortfolio)
         );
+        // }
       }
     } else if (likedBy) {
       // 프로필 Saved 칸

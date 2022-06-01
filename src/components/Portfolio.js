@@ -206,6 +206,7 @@ function Portfolio() {
         {/* <ListPortfolios byField={portfolio.field} numPortfolio={4} /> */}
         {portfolio.field && (
           <ListPortfolios
+          curPortId={portId}
             byField={portfolio.field}
             viewMode={"latest"}
             numPortfolio={numSimilar}

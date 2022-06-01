@@ -88,9 +88,11 @@ function Navbar() {
         <Link to="/portfolios">Portfolio</Link>
         <Link to="/experts">Expert</Link> */}
         <div className="navbar-left-mobileVer">
-          <Link to={`/profile/${user.uid}`}>
-            <img src={profileImg} alt="img" className="navbar-right-user" />
-          </Link>
+          {user && (
+            <Link to={`/profile/${user.uid}`}>
+              <img src={profileImg} alt="img" className="navbar-right-user" />
+            </Link>
+          )}
           <i
             class="fa-solid fa-bars"
             onClick={(e) => {

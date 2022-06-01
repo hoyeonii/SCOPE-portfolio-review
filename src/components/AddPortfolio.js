@@ -24,7 +24,6 @@ import "./css/AddPortfolio.css";
 function AddPortfolio({ setSignUpModalOn }) {
   const [user] = useAuthState(auth); //로그인 했는지 확인
   // const [file, setFile] = React.useState([]);
-  console.log(user.uid);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -42,11 +41,7 @@ function AddPortfolio({ setSignUpModalOn }) {
   // const q = query(profileRef, where("userId", "==", user.uid));
   let userProfile = [];
   onSnapshot(profileRef, (snapshot) => {
-    console.log(snapshot.data());
-
     userProfile.push(snapshot.data());
-
-    // console.log(userProfile[0].field);
   });
 
   const handleChange = (e) => {
@@ -81,7 +76,7 @@ function AddPortfolio({ setSignUpModalOn }) {
       storage,
       formData.image
         ? `/image/${Date.now()}${formData.image.name}`
-        : `/image/${Date.now()}${formData.url}` //뭐가 안되면 files를 image로 바꿔야할수도?
+        : `/image/${Date.now()}${formData.url}`
     );
 
     const uploadTask = uploadBytesResumable(

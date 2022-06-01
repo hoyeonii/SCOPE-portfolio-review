@@ -97,7 +97,7 @@ function Comment({ id, pageNumber, userId }) {
     <div className="comments-container">
       {userId ? (
         <div className="comments-input">
-          <span className="comments-input-header">Leave comment</span>
+          {/* <span className="comments-input-header">Leave comment</span> */}
           <form
             onSubmit={(e) => {
               e.preventDefault();
