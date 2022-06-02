@@ -42,7 +42,7 @@ function LikeProfile({ id, likes }) {
           className={`fa-solid fa-heart`}
           style={{
             cursor: "pointer",
-            color: !likes?.includes(user.uid) ? " var(--main-dark)" : "white",
+            color: likes?.includes(user.uid) ? " var(--main-dark)" : "white",
             padding: "0px 2px",
             // textShadow: "0px 0px 2px white",
             WebkitTextStroke: "0.5px var(--main-dark)",
