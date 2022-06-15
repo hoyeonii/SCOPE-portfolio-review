@@ -68,7 +68,7 @@ function ListExperts({ byField, numExperts }) {
                 </div>
                 <div className="profileList-info-detail">
                   <span className="profileList-info-createBy">
-                    {pro.createBy}
+                    {pro.createBy || pro.displayName}
                     {pro.expert == true ? (
                       <img
                         src={verifiedMark}

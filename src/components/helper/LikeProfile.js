@@ -37,6 +37,7 @@ function LikeProfile({ id, likes }) {
 
   return (
     <div className="likeProfile">
+      <span className="likeText">Like </span>
       {user ? (
         <i
           className={`fa-solid fa-heart`}
@@ -58,7 +59,7 @@ function LikeProfile({ id, likes }) {
           }}
         />
       )}
-      <span>{likesCount}</span>
+      <span className="likesCount">{likesCount}</span>
     </div>
   );
 }

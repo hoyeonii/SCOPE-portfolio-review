@@ -78,7 +78,7 @@ function SignInModal({ show, onHide }) {
         // console.log(snapshot);
         // console.log(snapshot._document);
         if (snapshot._document) {
-          // alert("You are already registered!");
+          toast("You are already registered!", { type: "error" });
         } else {
           //not registered yet
           // alert("You are not registered!");
@@ -94,7 +94,7 @@ function SignInModal({ show, onHide }) {
             userId: auth.currentUser.uid,
             verifyMe: false,
             expert: false,
-            aboutMe: "",
+            aboutMe: `Hi there! I'm ${auth.currentUser.displayName}.`,
             followers: [],
           });
         }
@@ -115,6 +115,7 @@ function SignInModal({ show, onHide }) {
         } else {
           //not registered yet
           signOut(auth);
+          toast("You are not registered yet", { type: "error" });
         }
       });
     });
@@ -131,7 +132,6 @@ function SignInModal({ show, onHide }) {
         // console.log(snapshot);
         // console.log(snapshot._document);
         if (snapshot._document) {
-          // alert("You are already registered!");
         } else {
           //not registered yet
           // alert("You are not registered!");
@@ -146,7 +146,7 @@ function SignInModal({ show, onHide }) {
             userId: res.user.uid,
             verifyMe: false,
             expert: false,
-            aboutMe: "",
+            aboutMe: `Hi there! I'm ${res.user.displayName}.`,
             followers: [],
           });
         }
@@ -273,6 +273,7 @@ function SignInModal({ show, onHide }) {
           </div>
         ) : (
           <div className="login">
+            <h3>Sign In</h3>
             <div>
               {!signUpWith && (
                 <div className="login-continueWith">
@@ -306,7 +307,12 @@ function SignInModal({ show, onHide }) {
                     ></input>
                   </label>
                   <span className="login-or">or</span>
-                  <button className="login-google" onClick={signInGoogle}>
+                  <button
+                    className="login-google"
+                    onClick={() => {
+                      setSignUpWith("google");
+                    }}
+                  >
                     <img
                       src={googleLogo}
                       alt="google"
@@ -328,7 +334,7 @@ function SignInModal({ show, onHide }) {
                 {fields.map((el) => (
                   <option
                     onClick={() => setField(el)}
-                    style={{ backgroundColor: el === field ? "yellow" : "" }}
+                    // style={{ backgroundColor: el === field ? "yellow" : "" }}
                   >
                     {el}
                   </option>

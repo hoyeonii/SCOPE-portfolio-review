@@ -36,7 +36,6 @@ body {
 }
 
 .item {
-  background-color: var(--main-light);
   color: black;
   display: flex;
   justify-content: center;
@@ -64,9 +63,7 @@ body {
 }
 /* tablet */
 @media screen and (max-width: 1023px) {
-
 }
 /* mobile */
 @media screen and (max-width: 768px) {
-
 }

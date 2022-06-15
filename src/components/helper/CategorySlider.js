@@ -30,6 +30,7 @@ function CategorySlider() {
     width: `${setting.itemWidth}px`,
     height: `${setting.itemHeight}px`,
     margin: `0px ${setting.itemSideOffsets}px`,
+    backgroundColor: "gainsboro",
   };
 
   return (

@@ -104,7 +104,6 @@ function ListPortfolios({
           .sort((a, b) => {
             return b.likes.length - a.likes.length;
           });
-        console.log(portfolio);
         setPortfolios(portfolio);
       });
     }

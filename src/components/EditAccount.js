@@ -8,6 +8,7 @@ import {
   setDoc,
   addDoc,
   getDoc,
+  // updateDoc,
 } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import {
@@ -116,7 +117,7 @@ function EditAccount({ onHide }) {
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((url) => {
             // const articleRef = collection(db, "Profile");
-            setDoc(doc(db, "Profile", user.uid), {
+            updateDoc(doc(db, "Profile", user.uid), {
               // 여기 addDoc으로 고쳐야할수도
               field: field,
               displayName: displayName,

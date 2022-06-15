@@ -98,13 +98,7 @@ function Comment({ id, pageNumber, userId }) {
       {userId ? (
         <div className="comments-input">
           {/* <span className="comments-input-header">Leave comment</span> */}
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              saveComment(e.target[0].value, pageNumber);
-              setText("");
-            }}
-          >
+          <div className="comments-input-img-container">
             {profilePic && (
               <img
                 className="comments-input-img"
@@ -112,14 +106,29 @@ function Comment({ id, pageNumber, userId }) {
                 alt="profilePic"
               />
             )}
+          </div>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              saveComment(e.target[0].value, pageNumber);
+              setText("");
+            }}
+          >
+            {/* {profilePic && (
+              <img
+                className="comments-input-img"
+                src={profilePic}
+                alt="profilePic"
+              />
+            )} */}
             <div className="comments-input-text-container">
-              <input
-                type="text"
+              <textarea
+                type="textArea"
                 onChange={(e) => {
                   e.preventDefault();
                   setText(e.target.value);
                 }}
-                placeholder="Leave comment"
+                placeholder="Leave feedback for this user"
                 value={text}
                 className="comments-input-text"
               />
@@ -143,45 +152,46 @@ function Comment({ id, pageNumber, userId }) {
               .map((comment) => (
                 <div className="comment">
                   <div className="comment-info">
-                    <img
-                      src={comment.profileImg}
-                      alt="profilePic"
-                      height={25}
-                      width={25}
-                      style={{
-                        borderRadius: "50%",
-                        border: "2px solid gray",
-                        marginRight: "10px",
-                        marginTop: "5px",
-                      }}
-                    ></img>
-                    <div className="comment-name">{comment.name}</div>
-                    {comment.varified && (
+                    <div className="comment-info-left">
                       <img
-                        src={verifiedMark}
-                        alt="verifiedMark"
-                        height={15}
-                        width={15}
-                        style={{ alignSelf: "flex-end", margin: "5px" }}
+                        src={comment.profileImg}
+                        alt="profilePic"
+                        className="comment-info-profilePic"
                       ></img>
-                    )}
+                    </div>
+                    <div className="comment-info-right">
+                      <div className="comment-name">
+                        {comment.name}
+                        {comment.varified && (
+                          <img
+                            src={verifiedMark}
+                            alt="verifiedMark"
+                            height={15}
+                            width={15}
+                            style={{ alignSelf: "flex-end", margin: "5px" }}
+                          ></img>
+                        )}
+                      </div>
+                      <span className="comment-text">
+                        {comment.comment}{" "}
+                        <button
+                          className="comment-deleteBtn"
+                          onClick={() => {
+                            handleDelete(comment.id);
+                            console.log(comment.id);
+                          }}
+                          style={{
+                            display:
+                              user && comment.createBy === user.uid
+                                ? "inline"
+                                : "none",
+                          }}
+                        >
+                          <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                      </span>
+                    </div>
                   </div>
-                  <span className="comment-text">{comment.comment}</span>
-                  <button
-                    className="comment-deleteBtn"
-                    onClick={() => {
-                      handleDelete(comment.id);
-                      console.log(comment.id);
-                    }}
-                    style={{
-                      display:
-                        user && comment.createBy === user.uid
-                          ? "inline"
-                          : "none",
-                    }}
-                  >
-                    <i class="fa-solid fa-trash-can"></i>
-                  </button>
                 </div>
               ))}
           </div>

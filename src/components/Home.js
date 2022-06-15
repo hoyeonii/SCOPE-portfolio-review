@@ -60,7 +60,10 @@ function Home() {
   return (
     <div>
       <div className="home-banner">
-        <h1>Show off your Portfolio</h1>
+        <h1>
+          Find Your Expert & <br />
+          Improve Your Portfolio
+        </h1>
         <p>
           Your portfolio is ready, you know it's not good enough, <br />
           but your friends are saying it's all good? <br />
@@ -99,7 +102,12 @@ function Home() {
               <button
                 key={_i}
                 className="item"
-                style={{ ...itemStyle }}
+                style={{
+                  ...itemStyle,
+                  backgroundColor:
+                    byField == i ? "var(--main-dark)" : "var(--gray-light)",
+                  color: byField == i ? "white" : "black",
+                }}
                 onClick={() => {
                   // filteredField = i;
                   setByField(i);
@@ -165,7 +173,7 @@ function Home() {
         <h3>Experts</h3>
         <span>
           Our community of Experts will give you top industry advice on how to
-          make your portfolio stand out
+          make your portfolio stand out!
         </span>
         <ListExperts byField={byField} numExperts={12} />
       </div>

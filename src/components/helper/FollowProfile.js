@@ -42,7 +42,7 @@ function FollowProfile({ id, followers }) {
 
   return (
     user && (
-      <button onClick={handleFollow}>
+      <button className="followBtn" onClick={handleFollow}>
         {following ? "Unfollow" : "Follow"}
       </button>
     )

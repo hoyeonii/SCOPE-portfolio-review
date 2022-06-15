@@ -40,10 +40,15 @@
   padding: 5% 0;
 }
 
+.home-expertsList > span {
+  font-size: 1.2rem;
+  /* font-weight: 600; */
+}
+
 .home-portfolio-button {
   display: flex;
   justify-content: space-between;
-  padding: 10px 30px;
+  padding: 10px 7vw;
 }
 
 .home-portfolio-sortButton * {

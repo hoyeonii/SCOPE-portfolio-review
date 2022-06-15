@@ -94,7 +94,12 @@ function Portfolios() {
             <button
               key={_i}
               className="item"
-              style={{ ...itemStyle }}
+              style={{
+                ...itemStyle,
+                backgroundColor:
+                  byField == i ? "var(--main-dark)" : "var(--gray-light)",
+                color: byField == i ? "white" : "black",
+              }}
               onClick={() => {
                 // filteredField = i;
                 setByField(i);

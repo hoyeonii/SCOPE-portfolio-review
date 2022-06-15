@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import {
   doc,
   collection,
@@ -108,20 +108,34 @@ function Portfolio() {
         {portfolio && (
           <section className="portfolio">
             <div className="portfolio-profile">
-              <div className="portfolio-profile-left">
-                <img
-                  src={profile.imageUrl}
-                  alt="profilePic"
-                  height={40}
-                  width={40}
-                  style={{
-                    borderRadius: "50%",
-                    border: "1px solid gray",
-                    marginRight: "10px",
-                  }}
-                ></img>
-                <div>{portfolio.title}</div>
-              </div>
+              <Link to={`/profile/${profile.id}`}>
+                <div className="portfolio-profile-left">
+                  <img
+                    src={profile.imageUrl}
+                    alt="profilePic"
+                    height={70}
+                    width={70}
+                    style={{
+                      borderRadius: "50%",
+                      // border: "1px solid gray",
+                      marginRight: "20px",
+                      objectFit: "cover",
+                    }}
+                  ></img>
+
+                  <div>
+                    <div>
+                      <span className="displayName">{profile.displayName}</span>
+                      <span className="field">{profile.field}</span>
+                    </div>
+                    <div>
+                      <span>{profile.title}</span>
+                      <span> · </span>
+                      <span>{profile.career} of experience</span>
+                    </div>
+                  </div>
+                </div>
+              </Link>
               <div className="portfolio-profile-right">
                 {user && user.uid === portfolio.userId ? (
                   <DeleteArticle
@@ -131,11 +145,11 @@ function Portfolio() {
                 ) : (
                   profile.id && (
                     <div>
-                      <LikeProfile id={portfolio.id} likes={portfolio.likes} />
                       <FollowProfile
                         id={profile.id}
                         followers={profile.followers}
                       />
+                      <LikeProfile id={portfolio.id} likes={portfolio.likes} />
                     </div>
                   )
                 )}
@@ -186,7 +200,12 @@ function Portfolio() {
               <div className="portfolio-viewPortfolio-introduction">
                 <span>Introduction</span>
                 <p>{portfolio.description}</p>
-                <a href={url} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="portfolio-viewPortfolio-introduction-visit"
+                >
                   Visit the site
                 </a>
               </div>
@@ -206,7 +225,7 @@ function Portfolio() {
         {/* <ListPortfolios byField={portfolio.field} numPortfolio={4} /> */}
         {portfolio.field && (
           <ListPortfolios
-          curPortId={portId}
+            curPortId={portId}
             byField={portfolio.field}
             viewMode={"latest"}
             numPortfolio={numSimilar}

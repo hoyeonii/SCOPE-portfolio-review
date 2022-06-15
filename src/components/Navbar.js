@@ -102,14 +102,9 @@ function Navbar() {
           ></i>
         </div>
       </div>
-      {/* <div className="navbar-middle">
-        <i className="fa-solid fa-magnifying-glass"></i>
-        <input className="searchBar" placeholder="Search"></input>
-      </div> */}
-
       <div className="navbar-right">
         {user ? (
-          <div>
+          <>
             {/* <i
               className="fa-solid fa-envelope fa-lg"
               style={{
@@ -124,24 +119,25 @@ function Navbar() {
                 color: "gold",
               }}
             ></i> */}
-            <span>Welcome, {profile.displayName}</span>
+            <Link to={`/profile/${user.uid}`}>
+              <span>{profile.displayName}</span>
+            </Link>
             <Link to={`/profile/${user.uid}`}>
               <img src={profileImg} alt="img" className="navbar-right-user" />
             </Link>
             {/* <Link to="/accountInfo">upload profile</Link> */}
 
-            <Link to="/">
-              <button
-                onClick={() => {
-                  signOut(auth);
-                }}
-              >
-                Log out
-              </button>
-            </Link>
-          </div>
+            <button
+              onClick={() => {
+                signOut(auth);
+                navigate("/");
+              }}
+            >
+              Log out
+            </button>
+          </>
         ) : (
-          <div>
+          <>
             {/* <Link to="/login">
               <button
               // onClick={() => {
@@ -166,9 +162,16 @@ function Navbar() {
               show={signUpModalOn}
               onHide={() => setSignUpModalOn(false)}
             />
-          </div>
+          </>
         )}
       </div>
+      {/* <div className="navbar-middle">
+        <i
+          className="fa-solid fa-magnifying-glass"
+          style={{ padding: "30px" }}
+        ></i>
+        <input className="searchBar" placeholder="Search"></input>
+      </div> */}
       <div
         className="navbar-side"
         style={{ display: sideNavOpen ? "flex" : "none" }}

@@ -3,9 +3,9 @@
   grid-template-columns: 1fr;
   grid-template-rows: auto;
   grid-gap: 10px;
-  background-color: var(--main-lighter);
+  /* background-color: var(--main-lighter); */
 
-  padding: 2vw 0;
+  padding: 2vw 5vw;
 }
 
 @media screen and (min-width: 450px) {

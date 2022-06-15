@@ -31,7 +31,7 @@
   height: 15vw;
   border-radius: 50%;
   border: 1.5px dashed var(--main-dark);
-
+  object-fit: cover;
   margin: auto 5%;
 }
 .profile-info-createBy {
