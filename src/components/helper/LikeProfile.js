@@ -43,10 +43,10 @@ function LikeProfile({ id, likes }) {
           className={`fa-solid fa-heart`}
           style={{
             cursor: "pointer",
-            color: likes?.includes(user.uid) ? " var(--main-dark)" : "white",
+            color: likes?.includes(user.uid) ? "red" : "gray",
             padding: "0px 2px",
             // textShadow: "0px 0px 2px white",
-            WebkitTextStroke: "0.5px var(--main-dark)",
+            WebkitTextStroke: "1px white",
           }}
           onClick={handleLike}
         ></i>
@@ -54,8 +54,9 @@ function LikeProfile({ id, likes }) {
         <i
           className={`fa-solid fa-heart`}
           style={{
-            color: " var(--main-dark)",
+            color: "red",
             padding: "0px 2px",
+            WebkitTextStroke: "1px white",
           }}
         />
       )}

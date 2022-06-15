@@ -1,8 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter&family=JetBrains+Mono&family=Raleway&display=swap");
 :root {
-  --main-dark: #ef4813;
+  /* --main-dark: #ef4813;
   --main-light: #ffc095;
-  --main-lighter: #fff3e2;
+  --main-lighter: #fff3e2; */
+  --main-dark: #5e41ff;
+  --main-light: #a593ff;
+  --main-lighter: #f5efff;
   /* --main-lighter: #e6e6e6; */
   --secondary-dark: red;
   --secondary-light: red;

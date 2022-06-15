@@ -1,9 +1,12 @@
 .home-banner {
   position: relative;
-  height: 60vh;
+  /* height: 60vh; */
   /* border: 1px solid blue; */
-  background-color: var(--main-lighter);
-  padding: 5%;
+  /* background-color: var(--main-lighter); */
+  background: url("../image/header_bg.jpg");
+  background-size: cover;
+  object-fit: cover;
+  padding: 3% 7%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -11,9 +14,10 @@
   font-weight: 600;
 }
 .home-banner h1 {
-  color: var(--main-dark);
+  color: white;
   font-weight: 600;
-  font-size: 3rem;
+  font-size: 2.6rem;
+  margin: 2%;
   /* z-index: 1; */
 }
 .home-banner p {
@@ -22,10 +26,13 @@
   z-index: 1;
 }
 .home-banner button {
-  width: 30%;
-  padding: 1%;
-  border-radius: 0.5rem;
+  width: 20%;
+  padding: 1.5%;
+  margin: 2%;
+  border-radius: 50px;
   font-weight: 600;
+  background-color: white;
+  color: black;
 }
 .home-banner img {
   position: absolute;
@@ -72,9 +79,6 @@
 }
 /* tablet */
 @media screen and (max-width: 1023px) {
-  .home-banner {
-    height: 40vh;
-  }
   .home-banner h1 {
     font-size: 2rem;
   }

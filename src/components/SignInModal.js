@@ -26,8 +26,6 @@ import {
 } from "firebase/firestore";
 import googleLogo from "./image/google.png";
 import logo from "./image/logo.png";
-import logowithtext from "./image/logowithtext.png";
-import logowithtext2 from "./image/그림5.png";
 
 function SignInModal({ show, onHide }) {
   let navigate = useNavigate();
@@ -201,9 +199,12 @@ function SignInModal({ show, onHide }) {
       >
         <div className="login-logo">
           <img
-            src={logowithtext2}
+            src={logo}
             alt="logo"
-            style={{ width: "50%", margin: "50% 0 0 5%" }}
+            style={{
+              width: "50%",
+              marginTop: "50%",
+            }}
           />
         </div>
 

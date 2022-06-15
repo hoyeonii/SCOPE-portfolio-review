@@ -1,7 +1,6 @@
 .navbar {
   border-bottom: 1px solid gray;
-  padding: 0px !important;
-  margin-bottom: 2%;
+  padding: 0px 3% !important;
   z-index: 2;
 }
 .navbar-left {

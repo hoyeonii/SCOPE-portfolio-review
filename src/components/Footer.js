@@ -1,14 +1,18 @@
 import React from "react";
 import "./css/Footer.css";
+import logo from "./image/logo.png";
 function Footer() {
   return (
     <div className="footer">
       <div className="footer-upper">
-        <p>
-          Our mission is to inspire powerful conversations and collaborations
-          <br /> among members worldwide so together we can change the world
-          with creativity.
-        </p>
+        <div className="footer-upper-mission">
+          <img src={logo} alt="logo" />
+          <p>
+            Our mission is to inspire powerful conversations and collaborations
+            <br /> among members worldwide so together we can change the world
+            with creativity.
+          </p>
+        </div>
         <div className="footer-upper-links">
           <i class="fa-brands fa-facebook-square"></i>
           <i class="fa-brands fa-instagram-square"></i>

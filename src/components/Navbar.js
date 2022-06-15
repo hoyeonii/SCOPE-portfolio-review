@@ -18,7 +18,7 @@ import { db } from "../firebaseConfig";
 import "./css/Navbar.css";
 import { useNavigate } from "react-router-dom";
 import SignInModal from "./SignInModal";
-import logowithtext2 from "./image/그림5.png";
+import logo_nav from "./image/logo_nav.JPG";
 import SideNavBar from "./SideNavBar";
 
 function Navbar() {
@@ -60,7 +60,7 @@ function Navbar() {
           }}
           className="navbar-logo-container"
         >
-          <img src={logowithtext2} alt="logo" className="navbar-logo" />
+          <img src={logo_nav} alt="logo" className="navbar-logo" />
         </a>
         <a
           onClick={(e) => {

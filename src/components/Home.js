@@ -64,11 +64,11 @@ function Home() {
           Find Your Expert & <br />
           Improve Your Portfolio
         </h1>
-        <p>
+        {/* <p>
           Your portfolio is ready, you know it's not good enough, <br />
           but your friends are saying it's all good? <br />
           Get brutal reviews here :)
-        </p>
+        </p> */}
         <button
           onClick={() => {
             if (user) {
@@ -78,12 +78,12 @@ function Home() {
             }
           }}
         >
-          Upload portfolio
+          Let's Get Started
         </button>
-        <img
+        {/* <img
           src="https://edpuzzle.imgix.net/landing/color_home_teacher.png?w=2128"
           alt="banner"
-        />
+        /> */}
         <UploadPortfolioModal
           show={signUpModalOn}
           setSignUpModalOn={setSignUpModalOn}
