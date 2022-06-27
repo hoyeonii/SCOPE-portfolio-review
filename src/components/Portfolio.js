@@ -61,10 +61,11 @@ function Portfolio() {
     if (portfolio.url) {
       setUrl(portfolio.url);
       setFile("");
+      setLoading(true);
     } else {
       setUrl("");
       setFile(portfolio.imageUrl);
-      // setLoading(true);
+      setLoading(true);
     }
     try {
       const profileRef = doc(db, "Profile", portfolio.userId);
@@ -105,6 +106,7 @@ function Portfolio() {
         url:{url}
         <br /> file:{file}
         <br /> portId:{portId} */}
+
         {portfolio && (
           <section className="portfolio">
             <div className="portfolio-profile">

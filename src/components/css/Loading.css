@@ -1,0 +1,12 @@
+.Loading {
+  text-align: center;
+  align-items: center;
+}
+
+.Loading i {
+}
+
+@keyframes rotate {
+  from {
+  }
+}

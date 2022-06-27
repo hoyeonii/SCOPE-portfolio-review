@@ -17,6 +17,7 @@ import {
   query,
   where,
 } from "firebase/firestore";
+import LoadingPage from "./LoadingPage";
 
 function ListExperts({ byField, numExperts }) {
   const [profiles, setProfiles] = useState([]);
@@ -51,6 +52,7 @@ function ListExperts({ byField, numExperts }) {
     <div>
       {/* ListExperts {byField} */}
       <div className="profileList">
+        {profiles.length === 0 ? <LoadingPage /> : <></>}
         {!profiles ? (
           <div>no matching experts</div>
         ) : (

@@ -18,7 +18,7 @@ import FeedbackRequestStatus from "./FeedbackRequestStatus";
 import "../css/ListPortfolios.css";
 import UploadPortfolioModal from "../UploadPortfolioModal";
 import upload from "../image/upload.png";
-import Loading from "./Loading";
+import LoadingPage from "./LoadingPage";
 
 function ListPortfolios({
   byField,
@@ -112,7 +112,7 @@ function ListPortfolios({
 
   return (
     <div className="portfolios-list">
-      {portfolios || <Loading />}
+      {portfolios.length === 0 ? <LoadingPage /> : <></>}
       {portfolios.map((port) => (
         <div key={port.id} className="portfolios">
           <div>
