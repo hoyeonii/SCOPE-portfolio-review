@@ -2,9 +2,9 @@
   position: sticky;
 
   top: 0;
-  background-color: aqua;
-  width: 80vw;
-  height: 300px;
+  /* background-color: aqua; */
+  width: 90vw;
+  height: 95vh;
   z-index: 1;
   /* text-align: center; */
 }

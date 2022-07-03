@@ -98,10 +98,15 @@ function Portfolio() {
     changePage(+1);
   }
 
+  document.querySelector("iframe") &&
+    document.querySelector("iframe").addEventListener("load", function () {
+      console.log("ysss");
+      setLoading(false);
+    });
   return (
     <div>
-      {loading && <LoadingPage />}
       <div className="portfolio-upper">
+        {loading && <LoadingPage />}
         {/* {loading ? "loading" : "ready"}
         url:{url}
         <br /> file:{file}
@@ -190,13 +195,7 @@ function Portfolio() {
               )}
               {url !== "" && ( //포트폴리오 형식이 url일대
                 <div className="portfolio-viewPortfolio">
-                  <iframe
-                    src={url}
-                    allowfullscreen
-                    onload={() => {
-                      setLoading(false);
-                    }}
-                  />
+                  <iframe src={url} allowfullscreen />
                 </div>
               )}
               <div className="portfolio-viewPortfolio-introduction">

@@ -45,6 +45,22 @@ function Navbar() {
   //   console.log(profile);
   // }, [profile]);
 
+  const navLeftBtn = document.querySelectorAll(".navbar-left-btn");
+  const navLeftIndicator = document.querySelector(
+    ".navbar-left-btn-indicator "
+  );
+
+  navLeftBtn.forEach((btn) =>
+    btn.addEventListener("click", (e) => showIndicator(e))
+  );
+
+  const showIndicator = (e) => {
+    navLeftIndicator.style.left = e.currentTarget.offsetLeft + "px";
+    navLeftIndicator.style.top =
+      e.currentTarget.offsetTop + e.currentTarget.offsetHeight + "px";
+    navLeftIndicator.style.width = e.currentTarget.offsetWidth + "px";
+  };
+
   return (
     <div
       className="navbar"
@@ -62,7 +78,9 @@ function Navbar() {
         >
           <img src={logo_nav} alt="logo" className="navbar-logo" />
         </a>
+        <div className="navbar-left-btn-indicator"></div>
         <a
+          className="navbar-left-btn"
           onClick={(e) => {
             e.preventDefault();
             navigate("/portfolios");
@@ -74,6 +92,7 @@ function Navbar() {
           Portfolio
         </a>
         <a
+          className="navbar-left-btn"
           onClick={(e) => {
             e.preventDefault();
             navigate("/experts");

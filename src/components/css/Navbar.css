@@ -10,6 +10,7 @@
   align-items: center;
 }
 .navbar-left a {
+  color: black;
   box-sizing: border-box;
   text-decoration: none;
   padding: 3%;
@@ -17,12 +18,12 @@
   border-bottom: 4px solid transparent;
   font-weight: 600;
 }
-.navbar-left > a:hover {
+/* .navbar-left > a:hover {
   border-bottom: 4px solid var(--main-dark);
 }
 .navbar-left > a:nth-child(1):hover {
   border-bottom: 4px solid transparent;
-}
+} */
 .navbar-logo-container {
   cursor: pointer;
   /* margin-right: 3%; */
@@ -48,6 +49,13 @@
   width: 90%;
   padding: 0px 0px;
   border-bottom: none;
+}
+.navbar-left-btn-indicator {
+  position: absolute;
+  width: 50px;
+  height: 5px;
+  background-color: var(--main-dark);
+  transition: 1s ease-in-out;
 }
 
 .navbar-middle {
