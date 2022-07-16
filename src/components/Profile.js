@@ -185,21 +185,26 @@ function Profile() {
         />
 
         {/* //피드백 요청하기 */}
-        {/* <div>
-          {profile.expert && (
-            <Link to={`/requestFeedback/${id}`}>
-              <button>request feedback</button>
-            </Link>
-          )}
-          Feedback Request List
-          {requestsTome.map((request) => {
-            return (
-              <Link to={`/request/${request.id}`}>
-                <div>{request.id}</div>
+        {user && id !== user.uid ? ( //로그인이 되어있고 본인 프로필이 아닐 경우에만
+          <div>
+            {profile.expert && (
+              <Link to={`/requestFeedback/${id}`}>
+                <button>request feedback</button>
               </Link>
-            );
-          })}
-        </div> */}
+            )}
+          </div>
+        ) : (
+          <div>
+            Feedback Request List
+            {requestsTome.map((request) => {
+              return (
+                <Link to={`/request/${request.id}`}>
+                  <div>{request.id}</div>
+                </Link>
+              );
+            })}
+          </div>
+        )}
       </section>
       {/* <button
         onClick={() => {
