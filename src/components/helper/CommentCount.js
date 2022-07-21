@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from "react";
 import {
-  doc,
   query,
-  setDoc,
-  Timestamp,
   onSnapshot,
   where,
   orderBy,
-  addDoc,
   collection,
 } from "firebase/firestore";
 import { db } from "../../firebaseConfig";
-import verifiedMark from "../image/verifiedMark.jpg";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Comment({ id, userId }) {
   const [numofComment, setNumofComments] = useState(0);

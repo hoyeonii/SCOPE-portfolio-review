@@ -23,13 +23,11 @@ function Experts() {
 
   useEffect(() => {
     const profileRef = collection(db, "Profile");
-    // setByField(filteredField); ////////여기 지워봐ㅏ
     const q =
       byField == "All"
         ? query(
             profileRef,
             where("expert", "==", true)
-            // orderBy("createDate", "desc")
           )
         : query(
             profileRef,
@@ -43,7 +41,6 @@ function Experts() {
         ...doc.data(),
       }));
       setProfiles(profile);
-      // console.log("sorted by field" + byField);
     });
   }, [byField]);
 
@@ -100,7 +97,6 @@ function Experts() {
                 color: byField == i ? "white" : "black",
               }}
               onClick={() => {
-                // filteredField = i;
                 setByField(i);
               }}
             >

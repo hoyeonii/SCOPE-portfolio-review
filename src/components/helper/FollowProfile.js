@@ -46,28 +46,6 @@ function FollowProfile({ id, followers }) {
         {following ? "Unfollow" : "Follow"}
       </button>
     )
-    // <div className="followProfile">
-    // <span>{followersCount}</span>
-    // {user && (
-    //   <button onClick={handleFollow}>
-    //     {following ? "Unfollow" : "Follow"}
-    //   </button>
-    // )}
-    // </div>
-
-    /*
-        //하트모양
-        // <i
-        //   className={`fa fa-heart${
-        //     !followers?.includes(user.uid) ? "-o" : ""
-        //   } fa-lg`}
-        //   style={{
-        //     cursor: "pointer",
-        //     color: followers?.includes(user.uid) ? "red" : null,
-        //   }}
-        //   onClick={handleLike}
-        // />
-      )} */
   );
 }
 

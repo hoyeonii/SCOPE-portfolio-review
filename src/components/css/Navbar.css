@@ -51,8 +51,9 @@
   border-bottom: none;
 }
 .navbar-left-btn-indicator {
+  /* display: none; */
   position: absolute;
-  width: 50px;
+  /* width: 50px; */
   height: 5px;
   background-color: var(--main-dark);
   transition: 1s ease-in-out;

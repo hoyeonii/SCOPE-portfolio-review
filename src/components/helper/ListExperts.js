@@ -23,7 +23,6 @@ function ListExperts({ byField, numExperts }) {
   const [profiles, setProfiles] = useState([]);
   useEffect(() => {
     const profileRef = collection(db, "Profile");
-    // setByField(filteredField); ////////여기 지워봐ㅏ
     const q =
       byField == "All"
         ? query(
@@ -45,7 +44,6 @@ function ListExperts({ byField, numExperts }) {
       numExperts
         ? setProfiles(profile.slice(0, numExperts))
         : setProfiles(profile);
-      // console.log("sorted by field" + byField);
     });
   }, [byField]);
   return (
@@ -71,28 +69,17 @@ function ListExperts({ byField, numExperts }) {
                 <div className="profileList-info-detail">
                   <span className="profileList-info-createBy">
                     {pro.createBy || pro.displayName}
-                    {pro.expert == true ? (
+                    {pro.expert == true && (
                       <img
                         src={verifiedMark}
                         alt="verifiedMark"
                         style={{ margin: "0 0 5px 5px", width: "15px" }}
                       />
-                    ) : (
-                      ""
                     )}
-                    {/* <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    console.log("exper?", pro.expert);
-                  }}
-                >
-                  clickme
-                </button> */}
                   </span>
 
                   <span className="profileList-info-title">{pro.title}</span>
                   <span className="profileList-info-career">{pro.career}</span>
-                  {/* <button>See detail</button> */}
                 </div>
               </Link>
             </div>

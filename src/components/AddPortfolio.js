@@ -15,15 +15,12 @@ import { storage, db, auth } from "./../firebaseConfig";
 import { toast } from "react-toastify";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
-import PdfThumbnail from "react-pdf-thumbnail";
-import samplePDF from "../samplePDF.pdf";
-import ViewThumbnail from "./helper/ViewThumbnail";
+
 import { Document, Page } from "react-pdf/dist/esm/entry.webpack";
 import "./css/AddPortfolio.css";
 
 function AddPortfolio({ setSignUpModalOn }) {
   const [user] = useAuthState(auth); //로그인 했는지 확인
-  // const [file, setFile] = React.useState([]);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -38,7 +35,6 @@ function AddPortfolio({ setSignUpModalOn }) {
 
   ///firebase Profile 테이블에서 해당 유저 데이터 가져오기
   const profileRef = doc(db, "Profile", user.uid);
-  // const q = query(profileRef, where("userId", "==", user.uid));
   let userProfile = [];
   onSnapshot(profileRef, (snapshot) => {
     userProfile.push(snapshot.data());
@@ -49,9 +45,6 @@ function AddPortfolio({ setSignUpModalOn }) {
   };
   const handleImageChange = async (e) => {
     setFormData({ ...formData, image: e.target.files[0], url: null });
-    // .then(() =>
-    //   onButtonClick()
-    // );
   };
   const handleUrlChange = async (e) => {
     setFormData({ ...formData, url: e.target.value, image: null });
@@ -101,7 +94,6 @@ function AddPortfolio({ setSignUpModalOn }) {
           description: "",
           file: "",
         });
-
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
           console.log(userProfile);
           const articleRef = collection(db, "Portfolio");
@@ -132,39 +124,9 @@ function AddPortfolio({ setSignUpModalOn }) {
     );
   };
 
-  //   const formHandler = (e) => {
-  //     e.preventDefault();
-  //     const file = e.target[0].files[0];
-  //     uploadFiles(file);
-  //   };
-
-  //   const uploadFiles = (file) => {
-  //     if (!file) return;
-  //     const storageRef = ref(
-  //       storage,
-  //       `/files/${Date.now()}${formData.image.name}`
-  //     );
-
-  //     const uploadTask = uploadBytesResumable(storageRef, file);
-  //     uploadTask.on(
-  //       "state_changed",
-  //       (snapshot) => {
-  //         const prog = Math.round(
-  //           (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-  //         );
-
-  //         setProgress(prog);
-  //       },
-  //       (err) => console.log(err),
-  //       () => {
-  //         getDownloadURL(uploadTask.snapshot.ref).then((url) => console.log(url));
-  //       }
-  //     );
-  //   };
   const reff = useRef(null);
 
   const onButtonClick = useCallback(() => {
-    // console.log("onButtonClick");
     if (reff.current === null) {
       return;
     }
@@ -175,30 +137,6 @@ function AddPortfolio({ setSignUpModalOn }) {
         const link = document.createElement("a");
         link.href = dataUrl;
         setThumbnail(dataUrl);
-        // console.log(dataUrl);
-        // link.click();
-        // dataUrl.splice(0, 1);
-        // console.log(dataUrl);
-
-        // const storageRefThumb = ref(
-        //   storage,
-        //   `/image/${Date.now()}thumbNail` //뭐가 안되면 files를 image로 바꿔야할수도?
-        // );
-
-        // const uploadTaskThumb = uploadBytesResumable(storageRefThumb, dataUrl);
-        // uploadTaskThumb.on(
-        //   "state_changed",
-        //   (snapshot) => {},
-        //   (err) => {
-        //     console.log(err);
-        //   },
-        //   () => {
-        //     getDownloadURL(uploadTaskThumb.snapshot.ref).then((url) => {
-        //       console.log(url);
-        //       // console.log(url);
-        //     });
-        //   }
-        // );
       })
       .then(() => setLoading(false))
       .catch((err) => {
@@ -303,7 +241,6 @@ function AddPortfolio({ setSignUpModalOn }) {
                   >
                     {">"}
                   </button>
-                  {/* <img src={thumbnail} alt="thumb"></img> */}
                 </div>
                 <button
                   className="addport-pdf-thumbnail-saveBtn"
@@ -341,17 +278,6 @@ function AddPortfolio({ setSignUpModalOn }) {
               </div>
             )}
           </div>
-
-          {/* {formData.urlImage && (
-            <img src={formData.urlImage.name} alt="thumbnail" />
-          )} */}
-          {/* <ViewThumbnail /> */}
-          {/* <form onSubmit={formHandler}>
-            <input type="file" />
-            <button type="submit">Upload</button>
-          </form>
-          <h3>Upload {fileprogress}</h3> */}
-          {/* <button onClick={() => console.log(formData)}>show form</button> */}
           <button
             className="addPort-uploadBtn"
             onClick={(e) => handleUpload(e)}
