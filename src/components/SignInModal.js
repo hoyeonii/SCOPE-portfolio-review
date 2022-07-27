@@ -251,14 +251,6 @@ function SignInModal({ show, onHide }) {
               </button>
               {/* </div> */}
 
-              {/* <div
-                className="login-forgotPwd"
-                onClick={() => {}}
-                style={{ cursor: "pointer", textDecorationLine: "underline" }}
-              >
-                Did you forget your password?
-              </div> */}
-
               <div
                 className="login-register"
                 onClick={() => {
@@ -268,8 +260,6 @@ function SignInModal({ show, onHide }) {
               >
                 You don't have account yet?
               </div>
-
-              {/* <button onClick={onHide}>x</button> */}
             </div>
           </div>
         ) : (

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import CategorySlider from "./helper/CategorySlider";
-import Portfolios from "./Portfolios";
-import Experts from "./Experts";
+
 import ListExperts from "./helper/ListExperts";
 import Carousel from "./helper/Carousel";
 import ListPortfolios from "./helper/ListPortfolios";
@@ -64,11 +62,6 @@ function Home() {
           Find Your Expert & <br />
           Improve Your Portfolio
         </h1>
-        {/* <p>
-          Your portfolio is ready, you know it's not good enough, <br />
-          but your friends are saying it's all good? <br />
-          Get brutal reviews here :)
-        </p> */}
         <button
           onClick={() => {
             if (user) {
@@ -80,10 +73,6 @@ function Home() {
         >
           Let's Get Started
         </button>
-        {/* <img
-          src="https://edpuzzle.imgix.net/landing/color_home_teacher.png?w=2128"
-          alt="banner"
-        /> */}
         <UploadPortfolioModal
           show={signUpModalOn}
           setSignUpModalOn={setSignUpModalOn}
@@ -109,7 +98,6 @@ function Home() {
                   color: byField == i ? "white" : "black",
                 }}
                 onClick={() => {
-                  // filteredField = i;
                   setByField(i);
                 }}
               >
@@ -177,8 +165,6 @@ function Home() {
         </span>
         <ListExperts byField={byField} numExperts={12} />
       </div>
-      {/* {listPortfolios} */}
-      {/* <Experts /> */}
     </div>
   );
 }

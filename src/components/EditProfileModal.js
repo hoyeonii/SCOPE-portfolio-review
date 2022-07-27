@@ -6,13 +6,10 @@ import {
 } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-import React, { useState } from "react";
-import { auth, signInWithGoogle, db } from "./../firebaseConfig";
+import React from "react";
+import { auth } from "./../firebaseConfig";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { faShieldVirus } from "@fortawesome/free-solid-svg-icons";
-import { dataURItoByteString } from "react-pdf/dist/umd/shared/utils";
-import { Button, Modal } from "react-bootstrap";
+
 import EditAccount from "./EditAccount";
 
 function EditProfileModal({ show, onHide }) {
@@ -23,7 +20,6 @@ function EditProfileModal({ show, onHide }) {
     <Modal
       show={show}
       onHide={() => {
-        //()붙여서 props로 가져온 onHide 기능+이 페이지에서 필요한 기능도 추가해서 새로운 function만들기
         onHide();
       }}
       size="lg"
@@ -31,6 +27,7 @@ function EditProfileModal({ show, onHide }) {
       centered
     >
       <EditAccount onHide={onHide} />
+      dfi
     </Modal>
   );
 }

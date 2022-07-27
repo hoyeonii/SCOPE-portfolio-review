@@ -1,13 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useParams, Link } from "react-router-dom";
-import {
-  doc,
-  collection,
-  onSnapshot,
-  orderBy,
-  query,
-  where,
-} from "firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import { Document, Page } from "react-pdf/dist/esm/entry.webpack";
 import Comment from "./Comment.js";
@@ -51,13 +44,11 @@ function Portfolio() {
 
     onSnapshot(docRef, (snapshot) => {
       setPortfolio({ ...snapshot.data(), id: snapshot.id });
-      // portfolio.url ? setUrl(portfolio.url) : setFile(portfolio.imageUrl);
     });
   }, [file, portId]);
 
   useEffect(() => {
     console.log(profile.id, profile);
-    // portfolio.url ? setUrl(portfolio.url) : setFile(portfolio.imageUrl);
     if (portfolio.url) {
       setUrl(portfolio.url);
       setFile("");
@@ -76,8 +67,6 @@ function Portfolio() {
     } catch (error) {
       console.log(error);
     }
-
-    // console.log(profile);
   }, [portfolio]);
 
   function onDocumentLoadSuccess({ numPages }) {
@@ -107,10 +96,6 @@ function Portfolio() {
     <div>
       <div className="portfolio-upper">
         {loading && <LoadingPage />}
-        {/* {loading ? "loading" : "ready"}
-        url:{url}
-        <br /> file:{file}
-        <br /> portId:{portId} */}
 
         {portfolio && (
           <section className="portfolio">
@@ -223,7 +208,6 @@ function Portfolio() {
       </div>
       <section className="portfolio-related">
         <span>Similar portfolios</span>
-        {/* <ListPortfolios byField={portfolio.field} numPortfolio={4} /> */}
         {portfolio.field && (
           <ListPortfolios
             curPortId={portId}
@@ -233,7 +217,6 @@ function Portfolio() {
             setPortId={setPortId}
           />
         )}
-        {/* {numSimilar} */}
       </section>
     </div>
   );

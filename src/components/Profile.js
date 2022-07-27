@@ -12,29 +12,22 @@ import {
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebaseConfig";
 import { db } from "../firebaseConfig";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import FollowProfile from "./helper/FollowProfile";
 import "./css/Profile.css";
 import ListPortfolios from "./helper/ListPortfolios";
-import RequestFeedback from "./RequestFeedback";
 import EditProfileModal from "./EditProfileModal";
 
 function Profile() {
   const { id } = useParams();
   const [user] = useAuthState(auth);
-
-  //   const [profilePic, setprofilePic] = useState("");
-  //   const [userId, setUserId] = useState("");
   const [profile, setProfile] = useState([]);
-  const [portfolios, setPortfolios] = useState([]);
   const [followers, setFollowers] = useState([]);
   const [following, setFollowing] = useState([]);
   const [requestsTome, setRequestsTome] = useState([]);
   const [requestsFromme, setRequestsFromme] = useState([]);
   const [selectedTab, setSelectedTab] = useState("About Me");
   const [editProfileModalOn, setEditProfileModalOn] = useState(false);
-
-  let navigate = useNavigate();
 
   useEffect(() => {
     setFollowers(profile.followers);
@@ -206,14 +199,6 @@ function Profile() {
           </div>
         )}
       </section>
-      {/* <button
-        onClick={() => {
-          console.log(profile);
-          console.log(requestsFromme);
-        }}
-      >
-        click me
-      </button> */}
     </div>
   );
 }
